@@ -17,7 +17,6 @@ describe('App', () => {
     });
 
     it('FUCK THIS have a title saying Ionic App', () => {
-    browser.
       browser.getTitle().then(title => {
       expect(title).toEqual('Ionic App');
     })
