@@ -15,11 +15,12 @@ describe('App', () => {
       page.navigateTo('/');
       browser.waitForAngular();
       browser.waitForAngularEnabled();
-      driver.get('/');
+
     });
 
     it('FUCK THIS have a title saying Ionic App', () => {
-     driver.getTitle().then(title => {
+      driver.get('http://localhost:8100/');
+      driver.getTitle().then(title => {
        expect(title).toEqual('Ionic App');
      });
     });
