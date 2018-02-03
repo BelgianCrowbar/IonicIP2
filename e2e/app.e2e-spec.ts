@@ -1,8 +1,10 @@
 import { Page } from './app.po';
 import {browser} from "protractor";
+import { WebDriver} from "selenium-webdriver";
 
 describe('App', () => {
   let page: Page;
+  let driver: WebDriver;
 
   beforeEach(() => {
     page = new Page();
@@ -13,15 +15,17 @@ describe('App', () => {
       page.navigateTo('/');
       browser.waitForAngular();
       browser.waitForAngularEnabled();
+      driver.get('/');
     });
 
     it('FUCK THIS have a title saying Ionic App', () => {
-      page.getTitle().then(title => {
-        expect(title).toEqual('Ionic App');
-      });
+     driver.getTitle().then(title => {
+       expect(title).toEqual('Ionic App');
+     });
     });
 
     it('should have a title saying Ionic App', () => {
+
       page.getTitle().then(title => {
         expect(title).toEqual('Ionic App');
       });
