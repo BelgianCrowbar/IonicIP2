@@ -12,17 +12,14 @@ describe('App', () => {
 
   describe('default screen', () => {
     beforeEach(() => {
-      page.navigateTo('/');
       browser.waitForAngularEnabled(true);
-      
+      page.navigateTo('/');
     });
 
     it('FUCK THIS have a title saying Ionic App', () => {
-      setTimeout(() => {
-        page.getTitle().then(title => {
-          expect(title).toEqual('Ionic App');
-        });
-      }, 1000);
+      page.getTitle().then(title => {
+        expect(title).toEqual('Ionic App');
+      });
     });
 
     it('should have a title saying Ionic App', () => {
