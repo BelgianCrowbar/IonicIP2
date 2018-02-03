@@ -1,4 +1,5 @@
 import { Page } from './app.po';
+import {browser} from "protractor";
 
 describe('App', () => {
   let page: Page;
@@ -14,6 +15,7 @@ describe('App', () => {
 
     it('should have a title saying Ionic App', () => {
       page.getTitle().then(title => {
+        browser.ignoreSynchronization = true;
         expect(title).toEqual('Ionic App');
       });
     });
