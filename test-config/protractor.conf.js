@@ -20,6 +20,7 @@ exports.config = {
     defaultTimeoutInterval: 30000,
     print: function() {}
   },
+  rootElement: 'infarm-app',
   useAllAngular2AppRoots: true,
   beforeLaunch: function() {
     require('ts-node').register({
@@ -27,6 +28,7 @@ exports.config = {
     });
   },
   onPrepare: function() {
-    jasmine.getEnv().addReporter(new SpecReporter());
+    require('jasmine-expect');
+    jasmine.getEnv().addReporter(new SpecReporter({spec: {displayStacktrace: true}}));
   }
 };
