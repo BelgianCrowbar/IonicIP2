@@ -25678,142 +25678,97 @@ ion-navbar.toolbar {
   min-height: calc(46px + env(safe-area-inset-bottom));
 }
 
-page-item-create .profile-image-wrapper {
-  text-align: center;
-  margin: 20px 0;
+.action-sheets-basic-page {
+  position: relative;
 }
 
-page-item-create .profile-image-wrapper .profile-image {
-  width: 96px;
-  height: 96px;
-  border-radius: 50%;
-  display: inline-block;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+.action-sheets-basic-page .ion-md-share {
+  color: #ED4248;
 }
 
-page-item-create .profile-image-wrapper .profile-image-placeholder {
-  display: inline-block;
-  background-color: #eee;
-  width: 96px;
-  height: 96px;
-  border-radius: 50%;
-  font-size: 12px;
+.action-sheets-basic-page .ion-md-arrow-dropright-circle {
+  color: #508AE4;
 }
 
-page-item-create .profile-image-wrapper .profile-image-placeholder ion-icon {
-  font-size: 44px;
-  margin-bottom: -10px;
-  margin-top: 10px;
+.action-sheets-basic-page .ion-md-heart-outline {
+  color: #31D55F;
 }
 
-page-item-detail .item-profile {
-  width: 100%;
-  background-position: center center;
-  background-size: cover;
-  height: 250px;
+.action-sheets-basic-page .action-sheet-cancel ion-icon,
+.action-sheets-basic-page .action-sheet-destructive ion-icon {
+  color: #757575;
 }
 
-page-item-detail .item-detail {
-  width: 100%;
-  background: white;
+.action-sheets-basic-page .knop {
   position: absolute;
+  background: red;
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  margin-left: 10%;
+  margin-top: 10%;
 }
 
-page-tutorial .toolbar-background {
-  background: transparent;
-  border-color: transparent;
-}
-
-page-tutorial .slide-zoom {
-  height: 100%;
-}
-
-page-tutorial .slide-title {
-  margin-top: 2.8rem;
-}
-
-page-tutorial .slide-image {
-  max-height: 40%;
-  max-width: 60%;
-  margin: 36px 0;
-}
-
-page-tutorial b {
-  font-weight: 500;
-}
-
-page-tutorial p {
-  padding: 0 40px;
-  font-size: 14px;
-  line-height: 1.5;
-  color: #60646B;
-}
-
-page-tutorial p b {
-  color: #000000;
-}
-
-page-welcome .splash-bg {
+.action-sheets-basic-page #outer-circle {
+  background: #385a94;
+  border-radius: 50%;
+  height: 350px;
+  width: 350px;
   position: relative;
-  background: url("../assets/img/splashbg.png") no-repeat transparent;
-  background-size: cover;
-  height: 45%;
-  z-index: 1;
-  background-repeat: repeat-x;
-  -webkit-animation: animatedBackground 40s linear infinite;
-  animation: animatedBackground 40s linear infinite;
 }
 
-@-webkit-keyframes animatedBackground {
-  from {
-    background-position: 0 0;
-  }
-  to {
-    background-position: 100% 0;
-  }
+.action-sheets-basic-page #inner-circle {
+  position: absolute;
+  background: #a9aaab;
+  border-radius: 50%;
+  height: 290px;
+  width: 290px;
+  /*
+     Put top edge and left edge in the center
+    */
+  top: 51%;
+  left: 51%;
+  margin: -150px 0px 0px -150px;
 }
 
-@keyframes animatedBackground {
-  from {
-    background-position: 0 0;
-  }
-  to {
-    background-position: 100% 0;
-  }
+.action-sheets-basic-page #inner-circle2 {
+  position: absolute;
+  background: cadetblue;
+  border-radius: 50%;
+  height: 230px;
+  width: 230px;
+  /*
+     Put top edge and left edge in the center
+    */
+  top: 62%;
+  left: 62%;
+  margin: -150px 0px 0px -150px;
 }
 
-page-welcome .splash-info {
-  position: relative;
-  z-index: 2;
-  margin-top: -64px;
-  text-align: center;
+.action-sheets-basic-page #inner-circle3 {
+  position: absolute;
+  background: darkblue;
+  border-radius: 50%;
+  height: 150px;
+  width: 150px;
+  /*
+     Put top edge and left edge in the center
+    */
+  top: 82%;
+  left: 82%;
+  margin: -150px 0px 0px -150px;
 }
 
-page-welcome .splash-logo {
-  margin: auto;
-  background: url("../assets/img/appicon.png") repeat transparent;
-  background-size: 100%;
-  width: 128px;
-  height: 128px;
-}
-
-page-welcome .splash-intro {
-  font-size: 18px;
-  font-weight: bold;
-  max-width: 80%;
-  margin: auto;
-}
-
-page-welcome button.login {
-  margin-top: 25px;
-  background-color: white;
-  -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
-  color: #333;
-}
-
-page-welcome button.login.activated {
-  background-color: gainsboro;
+.action-sheets-basic-page #inner-circle4 {
+  position: absolute;
+  background: cornflowerblue;
+  border-radius: 50%;
+  height: 75px;
+  width: 75px;
+  /*
+     Put top edge and left edge in the center
+    */
+  top: 125%;
+  left: 125%;
+  margin: -150px 0px 0px -150px;
 }
