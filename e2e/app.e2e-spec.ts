@@ -1,10 +1,10 @@
 import {Page} from './app.po';
 import {browser} from "protractor";
-import {timeout} from "q";
-import {timeInterval} from "rxjs/operator/timeInterval";
+import {titleCase} from "@ionic/app-scripts";
 
 describe('App', () => {
   let page: Page;
+
 
   beforeEach(() => {
     page = new Page();
@@ -12,20 +12,22 @@ describe('App', () => {
 
   describe('default screen', () => {
     beforeEach(() => {
-      browser.waitForAngularEnabled(true);
-      page.navigateTo('/');
+
+      browser.get('/');
+     // page.navigateTo('/');
     });
 
     it('FUCK THIS have a title saying Ionic App', () => {
-      page.getTitle().then(title => {
-        expect(title).toEqual('Ionic App');
-      });
+    browser.getTitle().then(title => {
+      expect(title).toEqual('Ionic App');
+    })
+
     });
 
-    it('should have a title saying Ionic App', () => {
+   /* it('should have a title saying Ionic App', () => {
       page.getTitle().then(title => {
         expect(title).toEqual('Ionic App');
       });
-    });
+    });*/
   })
 });
