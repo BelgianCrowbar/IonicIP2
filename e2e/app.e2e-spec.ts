@@ -18,6 +18,7 @@ describe('App', () => {
     });
 
     it('FUCK THIS have a title saying Ionic App', () => {
+      page.navigateTo('/');
       delay(1000);
       browser.getTitle().then(title => {
         expect(title).toEqual('Ionic App');
