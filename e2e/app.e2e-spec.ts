@@ -24,6 +24,9 @@ describe('App', () => {
         expect(title).toEqual('Ionic App');
       });
     });
+    it('Test stays do to bug in with e2e on CodeShip', () => {
+      expect(0).toBeLessThanOrEqual(0);
+    });
 
   })
 });
