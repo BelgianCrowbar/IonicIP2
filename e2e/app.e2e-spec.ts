@@ -1,5 +1,8 @@
 import {Page} from './app.po';
-import {browser} from "protractor";
+import {browser, element} from "protractor";
+import {By} from "selenium-webdriver";
+import {del} from "selenium-webdriver/http";
+import {delay} from "q";
 
 describe('App', () => {
   let page: Page;
@@ -11,11 +14,11 @@ describe('App', () => {
 
   describe('default screen', () => {
     beforeEach(() => {
-
       page.navigateTo('/');
     });
 
     it('FUCK THIS have a title saying Ionic App', () => {
+      delay(1000);
       browser.getTitle().then(title => {
         expect(title).toEqual('Ionic App');
       });
