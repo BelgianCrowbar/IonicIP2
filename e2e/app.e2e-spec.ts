@@ -11,9 +11,7 @@ describe('App', () => {
   describe('default screen', () => {
     beforeEach(() => {
       page.navigateTo('/');
-      browser.waitForAngular();
-      browser.waitForAngularEnabled();
-
+      browser.waitForAngularEnabled(true);
     });
 
     it('FUCK THIS have a title saying Ionic App', () => {
