@@ -17,10 +17,9 @@ describe('App', () => {
     });
 
     it('FUCK THIS have a title saying Ionic App', () => {
-      browser.getTitle().then(title => {
-      expect(title).toEqual('Ionic App');
-    })
-
+      page.getTitle().then(title => {
+        expect(title).toEqual('Ionic App');
+      });
     });
 
     it('should have a title saying Ionic App', () => {
