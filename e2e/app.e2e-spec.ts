@@ -12,6 +12,7 @@ describe('App', () => {
     beforeEach(() => {
       page.navigateTo('/');
       browser.waitForAngular();
+      browser.waitForAngularEnabled();
     });
 
     it('FUCK THIS have a title saying Ionic App', () => {
