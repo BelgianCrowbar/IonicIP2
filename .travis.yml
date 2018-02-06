@@ -15,14 +15,12 @@ matrix:
 before_script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
-  - ionic-app-scripts serve
-  - sleep 3
 install:
   - npm install
 script:
   - npm run e2e
   - npm run build
-  - npm run test-ci
+#  - ionic-app-scripts serve & npm run test-ci
 notifications:
   email: false
 deploy:
