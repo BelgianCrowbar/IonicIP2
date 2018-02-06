@@ -1,6 +1,12 @@
 language: node_js
 node_js:
   - stable
+addons:
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - google-chrome-stable
 branches:
   only:
     - master
@@ -11,5 +17,6 @@ install:
 script:
   - npm run build
   - npm run test-ci
+  - npm run ionic:serve & npm run e2e
 notifications:
   email: false
