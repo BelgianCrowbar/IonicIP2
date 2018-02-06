@@ -20,11 +20,10 @@ install:
 script:
   - npm run build
   - npm run test-ci
-  - npm run e2e
-#  - ionic-app-scripts serve & npm run e2e
+# - npm run e2e
 notifications:
   email: false
 deploy:
   provider: heroku
-  api_key: ...
+  api_key: SHA256:Sf8Y/NqE96iYO8ok6wS0w12WlXATTBhf7yDP185o/SU u16345@b30f78bd-6342-4414-9e39-930bb5cd3f4c
   strategy: git
