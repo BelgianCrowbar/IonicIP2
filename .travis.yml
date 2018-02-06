@@ -17,6 +17,7 @@ before_script:
   - sh -e /etc/init.d/xvfb start
 install:
   - npm install
+  - webdriver-manager start
 script:
   - npm run build
   - npm run test-ci
