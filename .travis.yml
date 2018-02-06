@@ -19,7 +19,6 @@ install:
   - npm install
 script:
   - npm run build
-  - npm run test-ci
-  - npm run ionic:serve && npm run e2e
+  - npm run ci
 notifications:
   email: false
