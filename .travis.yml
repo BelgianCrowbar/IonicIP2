@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - stable
+  - 8
 addons:
   apt:
     sources:
@@ -16,7 +16,6 @@ before_install:
 install:
   - npm install
 script:
-  - npm run test-ci
   - npm run build
 notifications:
   email: false
