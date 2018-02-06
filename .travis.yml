@@ -20,6 +20,6 @@ install:
 script:
   - npm run build
   - npm run test-ci
-  - npm run e2e
+  - npm run ionic:serve & npm run e2e
 notifications:
   email: false
