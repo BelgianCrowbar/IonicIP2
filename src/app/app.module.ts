@@ -6,7 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { CardServiceProvider } from '../providers/card-service/card-service';
+
 
 @NgModule({
   declarations: [
@@ -26,7 +26,6 @@ import { CardServiceProvider } from '../providers/card-service/card-service';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    CardServiceProvider
   ]
 })
 export class AppModule {}
