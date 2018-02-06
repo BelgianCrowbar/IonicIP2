@@ -20,6 +20,10 @@ install:
 script:
   - npm run build
   - npm run test-ci
-  - xvfb-run -a npm run e2e -- --no-progress --config=./test-config/protractor.conf.js
+  - npm run ionic:serve & sleep 3 & npm run e2e
 notifications:
   email: false
+deploy:
+  provider: heroku
+  api_key: ...
+  strategy: git
