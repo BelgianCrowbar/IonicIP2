@@ -15,17 +15,14 @@ describe('App', () => {
       page.navigateTo('/');
     });
 
-    it('Test stays do to bug in with e2e on CodeShip', () => {
-     expect(0).toBeLessThanOrEqual(0);
+    it('Test', () => {
+     expect(true).toEqual(true);
     });
 
     it('should have a title saying Ionic App', () => {
       browser.getTitle().then(title => {
         expect(title).toEqual('Ionic App');
       });
-    });
-    it('Test stays do to bug in with e2e on CodeShip', () => {
-      expect(0).toBeLessThanOrEqual(0);
     });
 
   })
