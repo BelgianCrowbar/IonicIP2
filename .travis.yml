@@ -19,9 +19,9 @@ install:
   - npm install
   - webdriver-manager update
 script:
+  - ionic-app-scripts serve & npm run e2e
   - npm run build
   - npm run test-ci
-  - ionic-app-scripts serve & npm run e2e
 notifications:
   email: false
 deploy:
