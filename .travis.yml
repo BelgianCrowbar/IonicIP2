@@ -19,6 +19,7 @@ install:
   - npm install
 script:
   - npm run build
-  - npm run ci
+  - npm run test-ci
+  - xvfb-run -a npm run e2e -- --no-progress --config=./test-config/protractor.conf.js
 notifications:
   email: false
