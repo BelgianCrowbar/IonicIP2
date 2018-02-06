@@ -14,10 +14,9 @@ before_install:
   - "sudo chown root /opt/google/chrome/chrome-sandbox"
   - "sudo chmod 4755 /opt/google/chrome/chrome-sandbox"
 install:
-  - npm install -g
+  - npm install
 script:
   - npm run test-ci
-  - npm run ionic:serve & npm run e2e
   - npm run build
 notifications:
   email: false
