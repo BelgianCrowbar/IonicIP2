@@ -25,5 +25,5 @@ notifications:
   email: false
 deploy:
   provider: heroku
-  api_key: d83958eb-c8aa-4d62-b657-9061aa416271
+  api_key: 4826ae44-e42f-4bf6-be05-d7e2d70caa92
   strategy: git
