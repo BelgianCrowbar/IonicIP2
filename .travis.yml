@@ -26,4 +26,5 @@ notifications:
 deploy:
   provider: heroku
   api_key: 4826ae44-e42f-4bf6-be05-d7e2d70caa92
+  app: superproject2
   strategy: git
