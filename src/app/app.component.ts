@@ -1,19 +1,25 @@
-import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
+import {Component} from '@angular/core';
+import {Platform} from 'ionic-angular';
+import {StatusBar} from '@ionic-native/status-bar';
+import {SplashScreen} from '@ionic-native/splash-screen';
 
-import { HomePage } from '../pages/home/home';
+import {HomePage} from '../pages/home/home';
+import {LoginPage} from "../pages/login/login";
+import {AuthProvider} from "../providers/auth/auth";
+
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = HomePage;
-  pages: Array<{ title: string, component: any}>;
+  rootPage: any = HomePage;
+  pages: Array<{ title: string, component: any }>;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+  constructor(platform: Platform,
+              statusBar: StatusBar,
+              splashScreen: SplashScreen,
+              authProvider: AuthProvider) {
     this.pages = [
-      { title: 'Page One', component: HomePage }
+      {title: 'Page One', component: HomePage}
     ];
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -22,6 +28,19 @@ export class MyApp {
       splashScreen.hide();
     });
 
+    authProvider.authUser.subscribe(jwt => {
+      if (jwt) {
+        this.rootPage = HomePage;
+      }
+      else {
+        this.rootPage = LoginPage;
+      }
+    });
+
+    authProvider.checkLogin();
+
   }
+
+
 }
 
