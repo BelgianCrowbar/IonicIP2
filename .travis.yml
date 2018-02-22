@@ -17,12 +17,11 @@ install:
 - npm install
 script:
 - npm run build
-- npm run test-ci
 notifications:
   email: false
 deploy:
   provider: heroku
-  api_key: 
+  api_key:
     secure: Vv3NWLZVr+O7FtPv/35QzOlGWVER9dHYlQ9SWUay58nudycaqSeKsh58bkIU5GDBKEWJnVkged1qwSDA7PH3/hrG9lZaXU0Cdj6U7s4uzvfMbpxE3h8OYO/jTsP76lr3iIH8NjpMQDH8rFWPZpSZFtO0/Mj7RRq/MkU+axnuJVAQ00Fw+kr7uJZh/zsYx98BdsUsNOpHsE3acb4Z+LYxcGB0gUkT24qzD69WQ1qP5Xg0rFCYhutpXiyAEARPELtpB+UDPnJcx4uqdLDXcZ9z6rspTVoYLCvjp2CbP8S8wyKkx9nDAQsBwnG2a5f5VqZG48IcFi50DifuB8qEdFT2L3VvSwH/J7RpbHwYIEUXBJRLUs2ELyC85t1ZUoBNkg9UpNdLhocDiNUjoE0o4RiiE70Fki2DgPUe20XpnjgxZnIYYO/RK8+sKvlcUICA94+/6fj1uZ8aNgJQD7IAI/1BP4uK3OOkNeQjxje9LN+DRl1O4v/LfBrj77UVMVc4QL/xtTaL6mWcl9sQ/ES2ZdWSiiiv3XBwpxpXW3X0kw9+8k89L5thmrxBwgOlIFqci/2wzpfJBrXJ2APXbB5iXDD5Dwl7zQshO9WON9pJ0lhrTtETMjly5XrUHEegX3mQGlhT+6bLPQrg5kagl53xpN3n2+279QFdDq2cedqDzuMEc8s=
   app: ionic-ip2
   strategy: git
