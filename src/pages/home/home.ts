@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {ActionSheetController} from 'ionic-angular';
 import {JwtHelperService} from "@auth0/angular-jwt";
-import {SERVER_URL} from "../../config";
 import {AuthProvider} from "../../providers/auth/auth";
 import {HttpClient} from "@angular/common/http";
 

@@ -8,7 +8,7 @@ import {JwtHelperService} from "@auth0/angular-jwt";
 
 @Injectable()
 export class AuthProvider {
-  private jwtTokenName = 'jwt_token';
+  private jwtTokenName = 'token';
   private email = '';
   private firstName = '';
   private lastName = '';
@@ -25,11 +25,7 @@ export class AuthProvider {
   checkLogin() {
     this.storage.get(this.jwtTokenName).then(jwt => {
       if (jwt && !this.jwtHelper.isTokenExpired(jwt)) {
-        this.httpClient.get(`${SERVER_URL}/users/registrationConfirm`)
-          .subscribe(() => this.authUser.next(jwt),
-            (err) => this.storage.remove(this.jwtTokenName).then(() => this.authUser.next(null)));
-        // OR
-        // this.authUser.next(jwt);
+        this.authUser.next(jwt);
       }
       else {
         this.storage.remove(this.jwtTokenName).then(() => this.authUser.next(null));

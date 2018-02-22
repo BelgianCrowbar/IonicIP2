@@ -50,7 +50,8 @@ export class RegisterPage {
         message: 'Sign up successful please check mail',
         duration: 3000,
         position: 'bottom'
-      }).present();
+      });
+      toast.present();
     }else if (jwt.error.text ==="Failure type 1"){
       const toast = this.toastCtrl.create({
         message: 'Email already registered',

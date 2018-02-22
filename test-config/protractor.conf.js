@@ -10,7 +10,8 @@ exports.config = {
     '../e2e/**/*.e2e-spec.ts'
   ],
   capabilities: {
-    'browserName': 'chrome'
+    'browserName': 'chrome',
+    'chromeOptions': { 'args': ['incognito'] }
   },
   directConnect: true,
   baseUrl: 'http://localhost:8100/',
