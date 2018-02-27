@@ -12,6 +12,7 @@ import {Storage, IonicStorageModule} from "@ionic/storage";
 import {AuthProvider} from "../providers/auth/auth";
 import {HttpClientModule} from "@angular/common/http";
 import {JWT_OPTIONS, JwtModule} from '@auth0/angular-jwt'
+import {HttpModule} from "@angular/http";
 
 
 
