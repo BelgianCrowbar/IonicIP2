@@ -18,7 +18,7 @@ import {DebugElement} from "@angular/core";
 import {register} from "ts-node/dist";
 import {by, element} from "protractor";
 
-describe('MyApp Component', () => {
+describe('Login Component', () => {
   let fixture;
   let component;
   let submitEl;
@@ -27,7 +27,6 @@ describe('MyApp Component', () => {
   let toolbarEl;
   let auth;
   let authProviderStub;
-
   beforeEach(async(() => {
     authProviderStub = {
       jwtTokenName: 'token'
@@ -54,8 +53,6 @@ describe('MyApp Component', () => {
     loginEl = fixture.debugElement.query(By.css('ion-input[name=email]'));
     passwordEl = fixture.debugElement.query(By.css('ion-input[name=password'));
     toolbarEl = fixture.debugElement.query(By.css('.toolbar-title'));
-   /* TestBed.configureTestingModule({ providers: [AuthProvider] });
-    auth = TestBed.get(AuthProvider);*/
   });
 
   it('should create component', () => {
@@ -68,7 +65,4 @@ describe('MyApp Component', () => {
     expect(button.innerText).toContain('Sign up');
   });
 
- /* it('test checklogin', () => {
-    expect(auth.checkLogin()).toBe('real value');
-  });*/
 });
