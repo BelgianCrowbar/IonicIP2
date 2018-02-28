@@ -1,1 +1,38 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-menu [content]="content">
+  <ion-header>
+    <ion-toolbar>
+      <button ion-button icon-only menuToggle side="left">
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title side="right">Menu</ion-title>
+    </ion-toolbar>
+
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <button ion-item (click)="homePage()">
+        Home
+      </button>
+      <button ion-item (click)="gamePage()">
+        Games
+      </button>
+      <button ion-item (click)="openPage(eventsPage)">
+        Events
+      </button>
+    </ion-list>
+  </ion-content>
+  <ion-footer class="bar-light">
+    <div class="button-bar">
+      <button class="button button-icon icon " side="left" menuToggle>
+        <ion-icon name="home"></ion-icon>
+        Home
+      </button>
+      <button class="button button-icon icon ion-log-out" side="right" (click)="exitApp()">
+        <ion-icon name="exit"></ion-icon>
+        Exit
+      </button>
+    </div>
+  </ion-footer>
+</ion-menu>
+
+<ion-nav [root]="rootPage" #content></ion-nav>

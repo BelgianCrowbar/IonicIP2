@@ -25678,28 +25678,24 @@ ion-navbar.toolbar {
   min-height: calc(46px + env(safe-area-inset-bottom));
 }
 
-.action-sheets-basic-page {
-  position: relative;
-}
-
-.action-sheets-basic-page .ion-md-share {
+page-game .ion-md-share {
   color: #ED4248;
 }
 
-.action-sheets-basic-page .ion-md-arrow-dropright-circle {
+page-game .ion-md-arrow-dropright-circle {
   color: #508AE4;
 }
 
-.action-sheets-basic-page .ion-md-heart-outline {
+page-game .ion-md-heart-outline {
   color: #31D55F;
 }
 
-.action-sheets-basic-page .action-sheet-cancel ion-icon,
-.action-sheets-basic-page .action-sheet-destructive ion-icon {
+page-game .action-sheet-cancel ion-icon,
+page-game .action-sheet-destructive ion-icon {
   color: #757575;
 }
 
-.action-sheets-basic-page .knop {
+page-game .knop {
   position: absolute;
   background: red;
   border-radius: 50%;
@@ -25709,7 +25705,7 @@ ion-navbar.toolbar {
   margin-top: 10%;
 }
 
-.action-sheets-basic-page #outer-circle {
+page-game #outer-circle {
   background: #385a94;
   border-radius: 50%;
   height: 350px;
@@ -25717,7 +25713,7 @@ ion-navbar.toolbar {
   position: relative;
 }
 
-.action-sheets-basic-page #inner-circle {
+page-game #inner-circle {
   position: absolute;
   background: #a9aaab;
   border-radius: 50%;
@@ -25731,7 +25727,7 @@ ion-navbar.toolbar {
   margin: -150px 0px 0px -150px;
 }
 
-.action-sheets-basic-page #inner-circle2 {
+page-game #inner-circle2 {
   position: absolute;
   background: cadetblue;
   border-radius: 50%;
@@ -25745,7 +25741,7 @@ ion-navbar.toolbar {
   margin: -150px 0px 0px -150px;
 }
 
-.action-sheets-basic-page #inner-circle3 {
+page-game #inner-circle3 {
   position: absolute;
   background: darkblue;
   border-radius: 50%;
@@ -25759,7 +25755,7 @@ ion-navbar.toolbar {
   margin: -150px 0px 0px -150px;
 }
 
-.action-sheets-basic-page #inner-circle4 {
+page-game #inner-circle4 {
   position: absolute;
   background: cornflowerblue;
   border-radius: 50%;
@@ -25771,4 +25767,16 @@ ion-navbar.toolbar {
   top: 125%;
   left: 125%;
   margin: -150px 0px 0px -150px;
+}
+
+.action-sheets-basic-page {
+  position: relative;
+}
+
+.action-sheets-basic-page ion-col div {
+  background-color: #f0f5ff;
+  border: 1px solid #e6e9ee;
+  border-radius: 2px;
+  padding: 5px;
+  text-align: center;
 }

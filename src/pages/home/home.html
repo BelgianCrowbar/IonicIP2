@@ -1,5 +1,10 @@
 <ion-header>
   <ion-navbar>
+
+    <button ion-button icon-only menuToggle side="left">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
     <ion-title>Home</ion-title>
   </ion-navbar>
 </ion-header>
@@ -7,59 +12,15 @@
 <ion-content padding class="action-sheets-basic-page">
   Welcome <strong>{{user}}</strong>
 
-  <button (click)="presentActionSheet()" class="knop">c
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3>Start Game</ion-col>
+      <ion-col col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3>Active Games</ion-col>
+      <ion-col col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3>Finished Games</ion-col>
+      <ion-col col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3>EXTRA</ion-col>
 
-  </button>
+    </ion-row>
 
+  </ion-grid>
 
-  <div id="content">
-    <div id="outer-circle">
-
-
-      <div id="inner-circle">
-        <span id="inside-content"></span>
-        <div id="inner-circle2">
-          <span id="inside-content2"></span>
-          <div id="inner-circle3">
-            <span id="inside-content3"></span>
-            <div id="inner-circle4">
-              <span id="inside-content4"></span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <ion-list>
-    <ion-item-sliding>
-      <ion-item>
-        Item1
-
-      </ion-item>
-      <ion-item-options side="left">
-        <button ion-button (click)="showInfo(item)">show Info</button>
-        <button ion-button color="danger" (click)="share(item)">Share</button>
-      </ion-item-options>
-
-      <ion-item-options side="right">
-        <button ion-button (click)="choose(item)">Choose</button>
-      </ion-item-options>
-    </ion-item-sliding>
-
-    <ion-item-sliding>
-      <ion-item>
-        Item2
-
-      </ion-item>
-      <ion-item-options side="left">
-        <button ion-button (click)="showInfo(item)">show Info</button>
-        <button ion-button color="danger" (click)="share(item)">Share</button>
-      </ion-item-options>
-
-      <ion-item-options side="right">
-        <button ion-button (click)="choose(item)">Choose</button>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
 </ion-content>
