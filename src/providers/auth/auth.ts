@@ -6,6 +6,8 @@ import {Storage} from "@ionic/storage";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {JwtHelperService} from "@auth0/angular-jwt";
 
+
+
 @Injectable()
 export class AuthProvider {
   private jwtTokenName = 'token';
@@ -14,13 +16,17 @@ export class AuthProvider {
   private lastName = '';
   private password = '';
   private matchingPassword = '';
-
   authUser = new ReplaySubject<any>(1);
 
   constructor(private readonly httpClient: HttpClient,
               private readonly storage: Storage,
               private readonly jwtHelper: JwtHelperService) {
   }
+
+
+
+
+
 
   checkLogin() {
     this.storage.get(this.jwtTokenName).then(jwt => {
@@ -40,7 +46,8 @@ export class AuthProvider {
       email: values.email,
       password: values.password
     });
-    const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+    let headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+    headers.append( 'Authorization', 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJpbmR5LmRld2Fja2VyQHN0dWRlbnQua2RnLmJlIiwiZXhwIjoxNTIwMjU1NDQ5fQ.vQ5LG41grArPwWFJu1J4Lg_KE6Xx2tenrN48O77b06pmDJmtHWBnAaN_ovVOJVzEnx4g5u8n_1gxI3xc_3AOag');
     return this.httpClient.post(`${SERVER_URL}/login`, body, {headers: headers})
       .pipe(tap(jwt => this.handleJwtResponse(jwt.token)));
   }
@@ -73,7 +80,8 @@ export class AuthProvider {
       }));
   }
 
-  private handleJwtResponse(jwt: string) {
+
+  handleJwtResponse(jwt: string) {
     return this.storage.set(this.jwtTokenName, jwt)
       .then(() => this.authUser.next(jwt))
       .then(() => jwt);

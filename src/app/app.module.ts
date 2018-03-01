@@ -13,13 +13,16 @@ import {AuthProvider} from "../providers/auth/auth";
 import {HttpClientModule} from "@angular/common/http";
 import {JWT_OPTIONS, JwtModule} from '@auth0/angular-jwt'
 import {HttpModule} from "@angular/http";
+import {GamePage} from "../pages/game/game";
+import {ProfilePage} from "../pages/profile/profile";
+import { RestProvider } from '../providers/rest/rest';
 
 
 
 export function jwtOptionsFactory(storage: Storage) {
   return {
-    tokenGetter: () => storage.get('jwt_token'),
-    whitelistedDomains: ['localhost:8080']
+    tokenGetter: () => storage.get('token'),
+    whitelistedDomains: ['http://localhost:8080/']
   }
 }
 
@@ -29,7 +32,9 @@ export function jwtOptionsFactory(storage: Storage) {
     MyApp,
     HomePage,
     LoginPage,
-    RegisterPage
+    RegisterPage,
+    GamePage,
+    ProfilePage
   ],
   imports: [
     BrowserModule,
@@ -50,13 +55,16 @@ export function jwtOptionsFactory(storage: Storage) {
     MyApp,
     HomePage,
     LoginPage,
-    RegisterPage
+    RegisterPage,
+    GamePage,
+    ProfilePage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
+    RestProvider,
   ]
 })
 export class AppModule {

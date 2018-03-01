@@ -25773,10 +25773,17 @@ page-game #inner-circle4 {
   position: relative;
 }
 
-.action-sheets-basic-page ion-col div {
-  background-color: #f0f5ff;
+.action-sheets-basic-page ion-grid {
+  width: 100%;
+  height: 100%;
+}
+
+.action-sheets-basic-page ion-col {
+  height: 100%;
+  font-size: 2em;
+  background-color: #3DBEC9;
   border: 1px solid #e6e9ee;
+  color: white;
   border-radius: 2px;
-  padding: 5px;
   text-align: center;
 }

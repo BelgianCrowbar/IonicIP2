@@ -1,8 +1,9 @@
 import {Component} from '@angular/core';
-import {ActionSheetController} from 'ionic-angular';
+import {ActionSheetController, NavController, NavParams} from 'ionic-angular';
 import {JwtHelperService} from "@auth0/angular-jwt";
 import {AuthProvider} from "../../providers/auth/auth";
 import {HttpClient} from "@angular/common/http";
+import {ProfilePage} from "../profile/profile";
 
 
 @Component({
@@ -17,7 +18,8 @@ export class HomePage {
   constructor(private readonly authProvider: AuthProvider,
               jwtHelper: JwtHelperService,
               private readonly httpClient: HttpClient,
-              public actionSheetCtrl: ActionSheetController) {
+              public navCtrl: NavController,
+              public navParams: NavParams) {
     this.authProvider.authUser.subscribe(jwt => {
       if (jwt) {
         const decoded = jwtHelper.decodeToken(jwt);
@@ -29,36 +31,7 @@ export class HomePage {
     });
   }
 
-  logout() {
-    this.authProvider.logout();
+  profilePage() {
+    this.navCtrl.setRoot(ProfilePage)
   }
-
-  presentActionSheet() {
-    let actionSheet = this.actionSheetCtrl.create({
-      title: 'Cinema',
-      buttons: [
-        {
-          text: 'Film 1',
-          role: 'destructive',
-          handler: () => {
-            console.log('Destructive clicked');
-          }
-        }, {
-          text: 'Archive',
-
-          handler: () => {
-            console.log('Archive clicked');
-          }
-        }, {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
-        }
-      ]
-    });
-    actionSheet.present();
-  }
-
 }
