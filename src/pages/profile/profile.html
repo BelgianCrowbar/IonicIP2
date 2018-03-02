@@ -16,7 +16,6 @@
 </ion-header>
 
 <ion-content padding>
-
   <h1>Profiel Bewerken</h1>
   <form #form="ngForm" (ngSubmit)="changeProfile(form.value)" novalidate>
     <ion-list>
@@ -26,8 +25,14 @@
                    [class.invalid]="firstName.errors && firstName.dirty"></ion-input>
       </ion-item>
       <ion-item class="error-message" *ngIf="firstName.errors?.required && firstName.dirty">
-        firstName is required
+        Voornaam is vereist
       </ion-item>
+      <div class="content">
+        <img class="img-avatar" src="{{imgsrc}}" height="40" width="40" alt="img-avatar">
+        <ion-item id="imgSelect" >
+          <ion-input type="file" name="file" id="file" class="form-control" (change)="onFileChange($event)"></ion-input>
+        </ion-item>
+      </div>
       <div padding>
         <button ion-button color="primary" block type="submit" [disabled]="!form.valid">Verander</button>
       </div>

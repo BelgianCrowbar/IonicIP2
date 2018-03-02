@@ -22,9 +22,9 @@ export class MyApp {
               private splashScreen: SplashScreen,
               private authProvider: AuthProvider) {
     this.pages = [
-      {title: 'Home', component: HomePage},
-      {title: 'Game', component: GamePage},
-      {title: 'Profile', component: ProfilePage}
+      {title: 'Start', component: HomePage},
+      {title: 'Spel', component: GamePage},
+      {title: 'Profiel', component: ProfilePage}
     ];
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.

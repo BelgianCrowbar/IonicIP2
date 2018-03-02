@@ -10,6 +10,8 @@ import {tap} from "rxjs/operators/tap";
 import {HttpClient, HttpClientModule, HttpHeaders} from "@angular/common/http";
 import {SERVER_URL} from "../../config";
 import {RequestOptions, RequestOptionsArgs} from "@angular/http";
+import {Picture} from "../../model/picture";
+import {error} from "util";
 
 
 /**
@@ -28,6 +30,8 @@ export class ProfilePage {
   @ViewChild('username')
   usernameModel: NgModel;
 
+  private picture: Picture;
+  imgsrc: string;
   user: User;
   loading: any;
 
@@ -38,32 +42,27 @@ export class ProfilePage {
               private restService: RestProvider,
               private auth: AuthProvider,
               private httpClient: HttpClient) {
-    auth.checkLogin();
     this.user = new User('', '', '')
   }
 
   ionViewDidLoad() {
+    this.picture = new Picture('','','');
     this.startloading('Inladen...');
     this.restService.get('users/currentuser', null)
       .subscribe(u => {
           this.user = u;
-          this.stoploading();
-        }, error2 => {
-          this.stoploading();
-          this.handleError(error2);
-        }
-      )
-    ;
-  }
+          this.restService.get('users/getProfilePicture', null).subscribe(
+            data => {
+              this.picture = data;
+              this.imgsrc = 'data:image/png;base64,'+ this.picture.value;
+              this.stoploading();
+            },
+            error => {
+              this.handleError(error);
+              this.stoploading();
+            }
+          );
 
-  changeProfile(value: any) {
-    this.startloading('Veranderen...');
-    const body = JSON.stringify({newName: value.firstName});
-    this.restService.post('users/update/', body)
-      .subscribe(data => {
-        this.user.firstName = value.firstName;
-        this.stoploading();
-        this.handleSucces();
         }, error2 => {
           this.stoploading();
           this.handleError(error2);
@@ -71,7 +70,42 @@ export class ProfilePage {
       );
   }
 
-  startloading(message:string ) {
+  changeProfile(value: any) {
+    this.startloading('Veranderen...');
+
+    this.user.firstName = value.firstName;
+    this.restService.post('users/update/', this.user)
+      .subscribe(data => {
+          this.user.firstName = value.firstName;
+          if (this.picture != null) {
+            this.restService.post('users/uploadProfilePicture', this.picture).subscribe(
+              data => {
+                this.stoploading();
+                this.handleSucces();
+              });
+          }
+        }
+        ,
+        error2 => {
+          this.stoploading();
+          this.handleError(error2);
+        }
+      );
+  }
+
+  onFileChange(event) {
+    const reader = new FileReader();
+    const file = event.target.files[0];
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      this.picture.filename = file.name;
+      this.picture.filetype = file.type;
+      this.picture.value = reader.result.split(',')[1];
+      this.imgsrc = 'data:image/png;base64,'+ this.picture.value;
+    };
+  }
+
+  startloading(message: string) {
     this.loading = this.loadingCtrl.create({
       spinner: 'bubbles',
       content: message
@@ -84,16 +118,17 @@ export class ProfilePage {
   }
 
   handleError(error: any) {
+    console.log('Error: ' + error);
     const toast = this.toastCtrl.create({
-      message: 'Er is iets fout gelopen! ' + error,
+      message: 'Er is iets fout gelopen! ',
       duration: 5000,
       position: 'bottom'
     }).present();
   }
 
-  handleSucces(){
+  handleSucces() {
     const toast = this.toastCtrl.create({
-      message: 'Alles is goed opgeslaan veranderd',
+      message: 'Alles is goed opgeslaan',
       duration: 5000,
       position: 'bottom'
     }).present();

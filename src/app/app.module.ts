@@ -22,7 +22,7 @@ import { RestProvider } from '../providers/rest/rest';
 export function jwtOptionsFactory(storage: Storage) {
   return {
     tokenGetter: () => storage.get('token'),
-    whitelistedDomains: ['http://localhost:8080/']
+    whitelistedDomains: ['https://springip2.herokuapp.com/']
   }
 }
 

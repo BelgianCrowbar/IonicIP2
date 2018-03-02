@@ -48,7 +48,7 @@ export class AuthProvider {
     });
     let headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     headers.append( 'Authorization', 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJpbmR5LmRld2Fja2VyQHN0dWRlbnQua2RnLmJlIiwiZXhwIjoxNTIwMjU1NDQ5fQ.vQ5LG41grArPwWFJu1J4Lg_KE6Xx2tenrN48O77b06pmDJmtHWBnAaN_ovVOJVzEnx4g5u8n_1gxI3xc_3AOag');
-    return this.httpClient.post(`${SERVER_URL}/login`, body, {headers: headers})
+    return this.httpClient.post(`${SERVER_URL}login`, body, {headers: headers})
       .pipe(tap(jwt => this.handleJwtResponse(jwt.token)));
   }
 

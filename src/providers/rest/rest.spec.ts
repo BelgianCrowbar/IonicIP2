@@ -35,12 +35,15 @@ describe('RestProvider', () => {
 
   });
 
-  it('Test the get current user function', ()=>{
+  it('Test the get current user function', () => {
     const testUser: User = new User("tim.vanaelst@student.kdg.be", 'Tim12', "Van Aelst");
 
     myProvider.get("users/currentuser", null, token).subscribe(
-      data => expect(data.email).toEqual(testUser.email), fail
-    );
+      data => {
+        expect(data.email).toEqual(testUser.email);
+        expect(data.lastName).toEqual(testUser.lastName);
+      });
+    httpMock.verify();
   });
 
   it('Test the get function', () => {
@@ -58,16 +61,17 @@ describe('RestProvider', () => {
           tags: []
         }];
 
-    myProvider.get("themes/getAll", null,  token).subscribe(
-      data => expect(data).toEqual(expectedThemes), fail
+    myProvider.get("themes/getAll", null, token).subscribe(
+      data => expect(data).toEqual(expectedThemes)
     );
+    httpMock.verify();
   });
 
   it('Test the post function', () => {
     const testTheme: Theme = new Theme(null, 'karmaTestTheme', 'Testing the post function on HttpService, Kandoe-Webclient', []);
-    myProvider.post('themes/create', testTheme, 'application/json',  token).subscribe(
-      data => expect(data).toEqual(testTheme), fail
-    );
+    myProvider.post('themes/create', testTheme, 'application/json', token).subscribe(
+      data => expect(data).toEqual(testTheme));
+    httpMock.verify();
   });
 
 

@@ -12,6 +12,7 @@ webpackJsonp([2],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__model_user__ = __webpack_require__(731);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_auth_auth__ = __webpack_require__(43);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_common_http__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__model_picture__ = __webpack_require__(732);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -21,6 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -43,16 +45,23 @@ var ProfilePage = /** @class */ (function () {
         this.restService = restService;
         this.auth = auth;
         this.httpClient = httpClient;
-        auth.checkLogin();
         this.user = new __WEBPACK_IMPORTED_MODULE_4__model_user__["a" /* User */]('', '', '');
     }
     ProfilePage.prototype.ionViewDidLoad = function () {
         var _this = this;
+        this.picture = new __WEBPACK_IMPORTED_MODULE_7__model_picture__["a" /* Picture */]('', '', '');
         this.startloading('Inladen...');
         this.restService.get('users/currentuser', null)
             .subscribe(function (u) {
             _this.user = u;
-            _this.stoploading();
+            _this.restService.get('users/getProfilePicture', null).subscribe(function (data) {
+                _this.picture = data;
+                _this.imgsrc = 'data:image/png;base64,' + _this.picture.value;
+                _this.stoploading();
+            }, function (error) {
+                _this.handleError(error);
+                _this.stoploading();
+            });
         }, function (error2) {
             _this.stoploading();
             _this.handleError(error2);
@@ -61,16 +70,32 @@ var ProfilePage = /** @class */ (function () {
     ProfilePage.prototype.changeProfile = function (value) {
         var _this = this;
         this.startloading('Veranderen...');
-        var body = JSON.stringify({ newName: value.firstName });
-        this.restService.post('users/update/', body)
+        this.user.firstName = value.firstName;
+        this.restService.post('users/update/', this.user)
             .subscribe(function (data) {
             _this.user.firstName = value.firstName;
-            _this.stoploading();
-            _this.handleSucces();
+            if (_this.picture != null) {
+                _this.restService.post('users/uploadProfilePicture', _this.picture).subscribe(function (data) {
+                    _this.stoploading();
+                    _this.handleSucces();
+                });
+            }
         }, function (error2) {
             _this.stoploading();
             _this.handleError(error2);
         });
+    };
+    ProfilePage.prototype.onFileChange = function (event) {
+        var _this = this;
+        var reader = new FileReader();
+        var file = event.target.files[0];
+        reader.readAsDataURL(file);
+        reader.onload = function () {
+            _this.picture.filename = file.name;
+            _this.picture.filetype = file.type;
+            _this.picture.value = reader.result.split(',')[1];
+            _this.imgsrc = 'data:image/png;base64,' + _this.picture.value;
+        };
     };
     ProfilePage.prototype.startloading = function (message) {
         this.loading = this.loadingCtrl.create({
@@ -83,31 +108,37 @@ var ProfilePage = /** @class */ (function () {
         this.loading.dismiss();
     };
     ProfilePage.prototype.handleError = function (error) {
+        console.log('Error: ' + error);
         var toast = this.toastCtrl.create({
-            message: 'Er is iets fout gelopen! ' + error,
+            message: 'Er is iets fout gelopen! ',
             duration: 5000,
             position: 'bottom'
         }).present();
     };
     ProfilePage.prototype.handleSucces = function () {
         var toast = this.toastCtrl.create({
-            message: 'Alles is goed opgeslaan veranderd',
+            message: 'Alles is goed opgeslaan',
             duration: 5000,
             position: 'bottom'
         }).present();
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('username'),
-        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__angular_forms__["NgModel"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_forms__["NgModel"]) === "function" && _a || Object)
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_2__angular_forms__["NgModel"])
     ], ProfilePage.prototype, "usernameModel", void 0);
     ProfilePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-profile',template:/*ion-inline-start:"D:\KdG\3de jaar\IntegratieProject\Officieel\IonicIP2\src\pages\profile\profile.html"*/'<!--\n  Generated template for the ProfilePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <button ion-button icon-only menuToggle side="left">\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Profiel</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n\n  <h1>Profiel Bewerken</h1>\n  <form #form="ngForm" (ngSubmit)="changeProfile(form.value)" novalidate>\n    <ion-list>\n      <ion-item>\n        <ion-label floating>Naam bewerken</ion-label>\n        <ion-input type="text" name="firstName" ngModel required #firstName="ngModel" value="{{user.firstName}}"\n                   [class.invalid]="firstName.errors && firstName.dirty"></ion-input>\n      </ion-item>\n      <ion-item class="error-message" *ngIf="firstName.errors?.required && firstName.dirty">\n        firstName is required\n      </ion-item>\n      <div padding>\n        <button ion-button color="primary" block type="submit" [disabled]="!form.valid">Verander</button>\n      </div>\n    </ion-list>\n  </form>\n\n</ion-content>\n'/*ion-inline-end:"D:\KdG\3de jaar\IntegratieProject\Officieel\IonicIP2\src\pages\profile\profile.html"*/,
+            selector: 'page-profile',template:/*ion-inline-start:"D:\KdG\3de jaar\IntegratieProject\Officieel\IonicIP2\src\pages\profile\profile.html"*/'<!--\n  Generated template for the ProfilePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <button ion-button icon-only menuToggle side="left">\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Profiel</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n  <h1>Profiel Bewerken</h1>\n  <form #form="ngForm" (ngSubmit)="changeProfile(form.value)" novalidate>\n    <ion-list>\n      <ion-item>\n        <ion-label floating>Naam bewerken</ion-label>\n        <ion-input type="text" name="firstName" ngModel required #firstName="ngModel" value="{{user.firstName}}"\n                   [class.invalid]="firstName.errors && firstName.dirty"></ion-input>\n      </ion-item>\n      <ion-item class="error-message" *ngIf="firstName.errors?.required && firstName.dirty">\n        Voornaam is vereist\n      </ion-item>\n      <div class="content">\n        <img class="img-avatar" src="{{imgsrc}}" height="40" width="40" alt="img-avatar">\n        <ion-item id="imgSelect" >\n          <ion-input type="file" name="file" id="file" class="form-control" (change)="onFileChange($event)"></ion-input>\n        </ion-item>\n      </div>\n      <div padding>\n        <button ion-button color="primary" block type="submit" [disabled]="!form.valid">Verander</button>\n      </div>\n    </ion-list>\n  </form>\n\n</ion-content>\n'/*ion-inline-end:"D:\KdG\3de jaar\IntegratieProject\Officieel\IonicIP2\src\pages\profile\profile.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ToastController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_3__providers_rest_rest__["a" /* RestProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_rest_rest__["a" /* RestProvider */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_5__providers_auth_auth__["a" /* AuthProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__providers_auth_auth__["a" /* AuthProvider */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_6__angular_common_http__["b" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__angular_common_http__["b" /* HttpClient */]) === "function" && _h || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_3__providers_rest_rest__["a" /* RestProvider */],
+            __WEBPACK_IMPORTED_MODULE_5__providers_auth_auth__["a" /* AuthProvider */],
+            __WEBPACK_IMPORTED_MODULE_6__angular_common_http__["b" /* HttpClient */]])
     ], ProfilePage);
     return ProfilePage;
-    var _a, _b, _c, _d, _e, _f, _g, _h;
 }());
 
 //# sourceMappingURL=profile.js.map
@@ -359,11 +390,11 @@ webpackEmptyAsyncContext.id = 196;
 
 var map = {
 	"../pages/game/game.module": [
-		843,
+		844,
 		1
 	],
 	"../pages/profile/profile.module": [
-		844,
+		845,
 		0
 	]
 };
@@ -491,10 +522,13 @@ var RestProvider = /** @class */ (function () {
     };
     RestProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["Injectable"])(),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["b" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["b" /* HttpClient */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4_ionic_angular__["k" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4_ionic_angular__["k" /* ToastController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_5__auth_auth__["a" /* AuthProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__auth_auth__["a" /* AuthProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_6__auth0_angular_jwt__["b" /* JwtHelperService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__auth0_angular_jwt__["b" /* JwtHelperService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_7__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__ionic_storage__["b" /* Storage */]) === "function" && _e || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_common_http__["b" /* HttpClient */],
+            __WEBPACK_IMPORTED_MODULE_4_ionic_angular__["k" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_5__auth_auth__["a" /* AuthProvider */],
+            __WEBPACK_IMPORTED_MODULE_6__auth0_angular_jwt__["b" /* JwtHelperService */],
+            __WEBPACK_IMPORTED_MODULE_7__ionic_storage__["b" /* Storage */]])
     ], RestProvider);
     return RestProvider;
-    var _a, _b, _c, _d, _e;
 }());
 
 //# sourceMappingURL=rest.js.map
@@ -506,7 +540,7 @@ var RestProvider = /** @class */ (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SERVER_URL; });
-var SERVER_URL = "http://localhost:8080/";
+var SERVER_URL = "https://springip2.herokuapp.com/";
 //# sourceMappingURL=config.js.map
 
 /***/ }),
@@ -637,13 +671,13 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(749);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(750);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(174);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_status_bar__ = __webpack_require__(377);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_splash_screen__ = __webpack_require__(380);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_login_login__ = __webpack_require__(175);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_register_register__ = __webpack_require__(381);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_ng2_validation__ = __webpack_require__(753);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_ng2_validation__ = __webpack_require__(754);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_ng2_validation___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_ng2_validation__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_storage__ = __webpack_require__(150);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__providers_auth_auth__ = __webpack_require__(43);
@@ -678,7 +712,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 function jwtOptionsFactory(storage) {
     return {
         tokenGetter: function () { return storage.get('token'); },
-        whitelistedDomains: ['http://localhost:8080/']
+        whitelistedDomains: ['https://springip2.herokuapp.com/']
     };
 }
 var AppModule = /** @class */ (function () {
@@ -802,7 +836,7 @@ var AuthProvider = /** @class */ (function () {
         });
         var headers = new __WEBPACK_IMPORTED_MODULE_5__angular_common_http__["d" /* HttpHeaders */]().set('Content-Type', 'application/json; charset=utf-8');
         headers.append('Authorization', 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJpbmR5LmRld2Fja2VyQHN0dWRlbnQua2RnLmJlIiwiZXhwIjoxNTIwMjU1NDQ5fQ.vQ5LG41grArPwWFJu1J4Lg_KE6Xx2tenrN48O77b06pmDJmtHWBnAaN_ovVOJVzEnx4g5u8n_1gxI3xc_3AOag');
-        return this.httpClient.post(__WEBPACK_IMPORTED_MODULE_3__config__["a" /* SERVER_URL */] + "/login", body, { headers: headers })
+        return this.httpClient.post(__WEBPACK_IMPORTED_MODULE_3__config__["a" /* SERVER_URL */] + "login", body, { headers: headers })
             .pipe(Object(__WEBPACK_IMPORTED_MODULE_1_rxjs_operators_tap__["tap"])(function (jwt) { return _this.handleJwtResponse(jwt.token); }));
     };
     AuthProvider.prototype.logout = function () {
@@ -869,7 +903,25 @@ var User = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 749:
+/***/ 732:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Picture; });
+var Picture = /** @class */ (function () {
+    function Picture(filename, filetype, value) {
+        this.filename = filename;
+        this.filetype = filetype;
+        this.value = value;
+    }
+    return Picture;
+}());
+
+//# sourceMappingURL=picture.js.map
+
+/***/ }),
+
+/***/ 750:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -910,9 +962,9 @@ var MyApp = /** @class */ (function () {
         this.authProvider = authProvider;
         this.rootPage = __WEBPACK_IMPORTED_MODULE_4__pages_home_home__["a" /* HomePage */];
         this.pages = [
-            { title: 'Home', component: __WEBPACK_IMPORTED_MODULE_4__pages_home_home__["a" /* HomePage */] },
-            { title: 'Game', component: __WEBPACK_IMPORTED_MODULE_7__pages_game_game__["a" /* GamePage */] },
-            { title: 'Profile', component: __WEBPACK_IMPORTED_MODULE_8__pages_profile_profile__["a" /* ProfilePage */] }
+            { title: 'Start', component: __WEBPACK_IMPORTED_MODULE_4__pages_home_home__["a" /* HomePage */] },
+            { title: 'Spel', component: __WEBPACK_IMPORTED_MODULE_7__pages_game_game__["a" /* GamePage */] },
+            { title: 'Profiel', component: __WEBPACK_IMPORTED_MODULE_8__pages_profile_profile__["a" /* ProfilePage */] }
         ];
         platform.ready().then(function () {
             // Okay, so the platform is ready and our plugins are available.
