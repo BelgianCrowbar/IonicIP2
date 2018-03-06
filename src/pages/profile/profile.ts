@@ -74,7 +74,7 @@ export class ProfilePage {
     this.startloading('Veranderen...');
 
     this.user.firstName = value.firstName;
-    this.restService.post('users/update/', this.user)
+    this.restService.post('users/update', this.user)
       .subscribe(data => {
           this.user.firstName = value.firstName;
           if (this.picture != null) {
