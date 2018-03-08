@@ -23,8 +23,8 @@ import {SessionOverviewPage} from "../pages/session-overview/session-overview";
 export function jwtOptionsFactory(storage: Storage) {
   return {
     tokenGetter: () => storage.get('token'),
-   // whitelistedDomains: ['https://springip2.herokuapp.com/']
-    whitelistedDomains: ['http://localhost:8080/']
+    whitelistedDomains: ['https://springip2.herokuapp.com/']
+   // whitelistedDomains: ['http://localhost:8080/']
   }
 }
 
