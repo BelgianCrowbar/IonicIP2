@@ -4,6 +4,7 @@ import {JwtHelperService} from "@auth0/angular-jwt";
 import {AuthProvider} from "../../providers/auth/auth";
 import {HttpClient} from "@angular/common/http";
 import {ProfilePage} from "../profile/profile";
+import {SessionOverviewPage} from "../session-overview/session-overview";
 
 
 @Component({
@@ -33,5 +34,9 @@ export class HomePage {
 
   profilePage() {
     this.navCtrl.setRoot(ProfilePage)
+  }
+
+  overviewPage() {
+    this.navCtrl.setRoot(SessionOverviewPage)
   }
 }

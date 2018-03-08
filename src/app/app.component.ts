@@ -8,6 +8,7 @@ import {LoginPage} from "../pages/login/login";
 import {AuthProvider} from "../providers/auth/auth";
 import {GamePage} from "../pages/game/game";
 import {ProfilePage} from "../pages/profile/profile";
+import {SessionOverviewPage} from "../pages/session-overview/session-overview";
 
 @Component({
   templateUrl: 'app.html'
@@ -59,6 +60,10 @@ export class MyApp {
 
   profilePage() {
     this.nav.setRoot(ProfilePage);
+  }
+
+  sessionsPage() {
+    this.nav.setRoot(SessionOverviewPage);
   }
 
 }

@@ -16,13 +16,15 @@ import {HttpModule} from "@angular/http";
 import {GamePage} from "../pages/game/game";
 import {ProfilePage} from "../pages/profile/profile";
 import { RestProvider } from '../providers/rest/rest';
+import {SessionOverviewPage} from "../pages/session-overview/session-overview";
 
 
 
 export function jwtOptionsFactory(storage: Storage) {
   return {
     tokenGetter: () => storage.get('token'),
-    whitelistedDomains: ['https://springip2.herokuapp.com/']
+   // whitelistedDomains: ['https://springip2.herokuapp.com/']
+    whitelistedDomains: ['http://localhost:8080/']
   }
 }
 
@@ -34,7 +36,8 @@ export function jwtOptionsFactory(storage: Storage) {
     LoginPage,
     RegisterPage,
     GamePage,
-    ProfilePage
+    ProfilePage,
+    SessionOverviewPage
   ],
   imports: [
     BrowserModule,
@@ -57,7 +60,8 @@ export function jwtOptionsFactory(storage: Storage) {
     LoginPage,
     RegisterPage,
     GamePage,
-    ProfilePage
+    ProfilePage,
+    SessionOverviewPage
   ],
   providers: [
     StatusBar,
