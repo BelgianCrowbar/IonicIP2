@@ -3,8 +3,8 @@ import {Theme} from "./theme";
 
 export class Session {
   sessionId: string;
-  theme: Theme;
-  players: String[];
+  themeId: string;
+  players: string[];
   numberOfRounds: number;
   canComment: boolean;
   addCardUser: boolean;

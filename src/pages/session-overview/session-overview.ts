@@ -37,7 +37,5 @@ export class SessionOverviewPage {
         }
       }
     },error2 => console.log(error2));
-
   }
-
 }
