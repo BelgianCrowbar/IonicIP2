@@ -42,16 +42,18 @@ export class ProfilePage {
               private restService: RestProvider,
               private auth: AuthProvider,
               private httpClient: HttpClient) {
-    this.user = new User('', '', '', '')
+    this.user = new User('', '', '', '');
+
   }
 
   ionViewDidLoad() {
-    this.picture = new Picture('', '', '', '');
+    this.picture = new Picture('', '', '');
     this.startloading('Inladen...');
     this.restService.get('users/currentuser', null)
       .subscribe(u => {
           this.user = u;
-          if (this.user.pictureId != null) {
+          console.log(this.user.pictureId);
+          if (this.user.pictureId != null || this.user.pictureId != undefined || this.user.pictureId != null) {
             this.restService.get('pictures/get/' + this.user.pictureId, null).subscribe(
               data => {
                 this.picture = data;
@@ -63,7 +65,7 @@ export class ProfilePage {
                 this.stoploading();
               }
             );
-          }else{
+          } else {
             this.stoploading();
           }
 
@@ -77,25 +79,42 @@ export class ProfilePage {
 
   changeProfile(value: any) {
     this.startloading('Veranderen...');
-
-    this.user.firstName = value.firstName;
-    this.restService.post('users/update', this.user)
-      .subscribe(data => {
+    console.log(this.picture);
+    if (this.picture != null) {
+      this.restService.post('pictures/create', this.picture).subscribe(data => {
+          console.log(data);
+          this.user.pictureId = data.pictureId;
           this.user.firstName = value.firstName;
-          if (this.picture != null) {
-            this.restService.post('pictures/create', this.picture).subscribe(
-              data => {
+          this.restService.post('users/update', this.user)
+            .subscribe(data => {
+                this.user.firstName = value.firstName;
                 this.stoploading();
                 this.handleSucces();
-              });
-          }
-        }
-        ,
-        error2 => {
-          this.stoploading();
-          this.handleError(error2);
+              }
+              ,
+              error2 => {
+                this.stoploading();
+                this.handleError(error2);
+              }
+            );
         }
       );
+    }
+    else {
+      this.user.firstName = value.firstName;
+      this.restService.post('users/update', this.user)
+        .subscribe(data => {
+            this.user.firstName = value.firstName;
+            this.stoploading();
+            this.handleSucces();
+          }
+          ,
+          error2 => {
+            this.stoploading();
+            this.handleError(error2);
+          }
+        );
+    }
   }
 
   onFileChange(event) {

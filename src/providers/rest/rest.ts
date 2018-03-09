@@ -49,8 +49,8 @@ export class RestProvider {
     let httpOptions = this.createHeader(contentType, token);
     return this.http.post(endpoint, body, httpOptions)
       .map((data: Response) => {
-        if (data.status === 200) {
-          return data.json();
+        if (data.status === 200 || data.status == undefined) {
+          return data;
         }
       }).catch((error: any) => {
         const toast = this.toastCtrl.create({
@@ -65,13 +65,13 @@ export class RestProvider {
   put(api: string, body: any = null, contentType: string = null): Observable<any> {
     const endpoint = this.baseUrl + api;
     let httpOptions = this.createHeader(contentType);
-    return this.http.put(endpoint, body, httpOptions).map((data: Response) => data.json());
+    return this.http.put(endpoint, body, httpOptions).map((data: Response) => data);
   }
 
   delete(api: string, contentType: string = null): Observable<any> {
     const endpoint = this.baseUrl + api;
     let httpOptions = this.createHeader(contentType);
-    return this.http.delete(endpoint, httpOptions).map((data: Response) => data.json());
+    return this.http.delete(endpoint, httpOptions).map((data: Response) => data);
   }
 
   createHeader(contentType: string, token: string = null): { headers: HttpHeaders } {

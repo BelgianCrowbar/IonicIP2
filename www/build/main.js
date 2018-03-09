@@ -49,12 +49,13 @@ var ProfilePage = /** @class */ (function () {
     }
     ProfilePage.prototype.ionViewDidLoad = function () {
         var _this = this;
-        this.picture = new __WEBPACK_IMPORTED_MODULE_7__model_picture__["a" /* Picture */]('', '', '', '');
+        this.picture = new __WEBPACK_IMPORTED_MODULE_7__model_picture__["a" /* Picture */]('', '', '');
         this.startloading('Inladen...');
         this.restService.get('users/currentuser', null)
             .subscribe(function (u) {
             _this.user = u;
-            if (_this.user.pictureId != null) {
+            console.log(_this.user.pictureId);
+            if (_this.user.pictureId != null || _this.user.pictureId != undefined || _this.user.pictureId != null) {
                 _this.restService.get('pictures/get/' + _this.user.pictureId, null).subscribe(function (data) {
                     _this.picture = data;
                     _this.imgsrc = 'data:image/png;base64,' + _this.picture.value;
@@ -75,20 +76,35 @@ var ProfilePage = /** @class */ (function () {
     ProfilePage.prototype.changeProfile = function (value) {
         var _this = this;
         this.startloading('Veranderen...');
-        this.user.firstName = value.firstName;
-        this.restService.post('users/update', this.user)
-            .subscribe(function (data) {
-            _this.user.firstName = value.firstName;
-            if (_this.picture != null) {
-                _this.restService.post('pictures/create', _this.picture).subscribe(function (data) {
+        console.log(this.picture);
+        if (this.picture != null) {
+            this.restService.post('pictures/create', this.picture).subscribe(function (data) {
+                console.log(data);
+                _this.user.pictureId = data.pictureId;
+                _this.user.firstName = value.firstName;
+                _this.restService.post('users/update', _this.user)
+                    .subscribe(function (data) {
+                    _this.user.firstName = value.firstName;
                     _this.stoploading();
                     _this.handleSucces();
+                }, function (error2) {
+                    _this.stoploading();
+                    _this.handleError(error2);
                 });
-            }
-        }, function (error2) {
-            _this.stoploading();
-            _this.handleError(error2);
-        });
+            });
+        }
+        else {
+            this.user.firstName = value.firstName;
+            this.restService.post('users/update', this.user)
+                .subscribe(function (data) {
+                _this.user.firstName = value.firstName;
+                _this.stoploading();
+                _this.handleSucces();
+            }, function (error2) {
+                _this.stoploading();
+                _this.handleError(error2);
+            });
+        }
     };
     ProfilePage.prototype.onFileChange = function (event) {
         var _this = this;
@@ -277,8 +293,8 @@ var RestProvider = /** @class */ (function () {
         var httpOptions = this.createHeader(contentType, token);
         return this.http.post(endpoint, body, httpOptions)
             .map(function (data) {
-            if (data.status === 200) {
-                return data.json();
+            if (data.status === 200 || data.status == undefined) {
+                return data;
             }
         }).catch(function (error) {
             var toast = _this.toastCtrl.create({
@@ -294,13 +310,13 @@ var RestProvider = /** @class */ (function () {
         if (contentType === void 0) { contentType = null; }
         var endpoint = this.baseUrl + api;
         var httpOptions = this.createHeader(contentType);
-        return this.http.put(endpoint, body, httpOptions).map(function (data) { return data.json(); });
+        return this.http.put(endpoint, body, httpOptions).map(function (data) { return data; });
     };
     RestProvider.prototype.delete = function (api, contentType) {
         if (contentType === void 0) { contentType = null; }
         var endpoint = this.baseUrl + api;
         var httpOptions = this.createHeader(contentType);
-        return this.http.delete(endpoint, httpOptions).map(function (data) { return data.json(); });
+        return this.http.delete(endpoint, httpOptions).map(function (data) { return data; });
     };
     RestProvider.prototype.createHeader = function (contentType, token) {
         if (token === void 0) { token = null; }
@@ -313,13 +329,10 @@ var RestProvider = /** @class */ (function () {
     };
     RestProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["Injectable"])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_common_http__["b" /* HttpClient */],
-            __WEBPACK_IMPORTED_MODULE_4_ionic_angular__["k" /* ToastController */],
-            __WEBPACK_IMPORTED_MODULE_5__auth_auth__["a" /* AuthProvider */],
-            __WEBPACK_IMPORTED_MODULE_6__auth0_angular_jwt__["b" /* JwtHelperService */],
-            __WEBPACK_IMPORTED_MODULE_7__ionic_storage__["b" /* Storage */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["b" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["b" /* HttpClient */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4_ionic_angular__["k" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4_ionic_angular__["k" /* ToastController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_5__auth_auth__["a" /* AuthProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__auth_auth__["a" /* AuthProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_6__auth0_angular_jwt__["b" /* JwtHelperService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__auth0_angular_jwt__["b" /* JwtHelperService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_7__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__ionic_storage__["b" /* Storage */]) === "function" && _e || Object])
     ], RestProvider);
     return RestProvider;
+    var _a, _b, _c, _d, _e;
 }());
 
 //# sourceMappingURL=rest.js.map
@@ -986,8 +999,7 @@ var User = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Picture; });
 var Picture = /** @class */ (function () {
-    function Picture(pictureId, filename, filetype, value) {
-        this.pictureId = pictureId;
+    function Picture(filename, filetype, value) {
         this.filename = filename;
         this.filetype = filetype;
         this.value = value;
