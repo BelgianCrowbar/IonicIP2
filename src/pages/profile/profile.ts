@@ -42,26 +42,31 @@ export class ProfilePage {
               private restService: RestProvider,
               private auth: AuthProvider,
               private httpClient: HttpClient) {
-    this.user = new User('', '', '')
+    this.user = new User('', '', '', '')
   }
 
   ionViewDidLoad() {
-    this.picture = new Picture('','','');
+    this.picture = new Picture('', '', '', '');
     this.startloading('Inladen...');
     this.restService.get('users/currentuser', null)
       .subscribe(u => {
           this.user = u;
-          this.restService.get('users/getProfilePicture', null).subscribe(
-            data => {
-              this.picture = data;
-              this.imgsrc = 'data:image/png;base64,'+ this.picture.value;
-              this.stoploading();
-            },
-            error => {
-              this.handleError(error);
-              this.stoploading();
-            }
-          );
+          if (this.user.pictureId != null) {
+            this.restService.get('pictures/get/' + this.user.pictureId, null).subscribe(
+              data => {
+                this.picture = data;
+                this.imgsrc = 'data:image/png;base64,' + this.picture.value;
+                this.stoploading();
+              },
+              error => {
+                this.handleError(error);
+                this.stoploading();
+              }
+            );
+          }else{
+            this.stoploading();
+          }
+
 
         }, error2 => {
           this.stoploading();
@@ -78,7 +83,7 @@ export class ProfilePage {
       .subscribe(data => {
           this.user.firstName = value.firstName;
           if (this.picture != null) {
-            this.restService.post('users/uploadProfilePicture', this.picture).subscribe(
+            this.restService.post('pictures/create', this.picture).subscribe(
               data => {
                 this.stoploading();
                 this.handleSucces();
@@ -101,7 +106,7 @@ export class ProfilePage {
       this.picture.filename = file.name;
       this.picture.filetype = file.type;
       this.picture.value = reader.result.split(',')[1];
-      this.imgsrc = 'data:image/png;base64,'+ this.picture.value;
+      this.imgsrc = 'data:image/png;base64,' + this.picture.value;
     };
   }
 
