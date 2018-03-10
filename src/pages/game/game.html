@@ -18,23 +18,38 @@
 
 
 <ion-content padding>
-  <button (click)="presentActionSheet()" class="knop">c
 
-  </button>
 
 
   <div id="content">
-    <div id="outer-circle">
 
+    <button *ngFor="let card of cards" (click)="presentActionSheet(card)" class="knop">{{card.get}}
+    </button>
 
-      <div id="inner-circle">
-        <span id="inside-content"></span>
-        <div id="inner-circle2">
-          <span id="inside-content2"></span>
-          <div id="inner-circle3">
-            <span id="inside-content3"></span>
-            <div id="inner-circle4">
-              <span id="inside-content4"></span>
+    <div class="blue circle">
+      <div class="white circle">
+        <div class="blue circle">
+          <div class="white circle">
+            <div class="blue circle">
+              <div class="white circle">
+                <div class="blue circle3">
+                  <div class="white circle3">
+                    <div class="blue circle3">
+                      <div class="white circle3">
+                        <div class="blue circle3">
+                          <div class="white circle3">
+                            <div class="blue circle2">
+                              <div class="white circle2">
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

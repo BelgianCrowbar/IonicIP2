@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import {ActionSheetController, IonicPage, NavController, NavParams} from 'ionic-angular';
+import {SessionOverviewPage} from "../session-overview/session-overview";
+import {Session} from "../../model/session";
+import {RestProvider} from "../../providers/rest/rest";
 
 /**
  * Generated class for the GamePage page.
@@ -15,7 +18,13 @@ import {ActionSheetController, IonicPage, NavController, NavParams} from 'ionic-
 })
 export class GamePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl: ActionSheetController) {
+  session: Session;
+
+
+  constructor(public navCtrl: NavController,
+              public httpService: RestProvider,
+              public navParams: NavParams,
+              public actionSheetCtrl: ActionSheetController) {
   }
 
   presentActionSheet() {
@@ -48,6 +57,9 @@ export class GamePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad GamePage');
+    let id = this.navParams.get('param1');
+    this.httpService.get('sessions/get/'+id).subscribe(data => {
+      this.session = data;
+    })
   }
-
 }
