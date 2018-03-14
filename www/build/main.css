@@ -25701,8 +25701,47 @@ page-game .knop {
   border-radius: 50%;
   height: 20px;
   width: 20px;
-  margin-left: 10%;
-  margin-top: 10%;
+}
+
+page-game .ladder {
+  position: relative;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 12em;
+  list-style: none;
+  overflow: auto;
+}
+
+page-game .ladder::before, page-game .ladder::after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: #e04020;
+  width: 1em;
+  content: '';
+  -webkit-box-shadow: 0 0 2px black;
+  box-shadow: 0 0 2px black;
+}
+
+page-game .ladder::before {
+  left: 0;
+}
+
+page-game .ladder::after {
+  right: 0;
+}
+
+page-game .ladder li {
+  margin: 4em 0;
+  padding: 0 1em;
+  background: #d5d5d5;
+  height: 1em;
+  text-align: center;
+  font-size: 0.68966em;
+  line-height: 1.45;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 page-game .white {
@@ -25743,7 +25782,7 @@ page-game .circle3 {
 page-game #content {
   position: relative;
   width: 95vw;
-  height: 95vw;
+  height: auto;
 }
 
 .action-sheets-basic-page {

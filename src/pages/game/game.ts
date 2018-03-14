@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {ActionSheetController, IonicPage, NavController, NavParams} from 'ionic-angular';
 import {SessionOverviewPage} from "../session-overview/session-overview";
 import {Session} from "../../model/session";
 import {RestProvider} from "../../providers/rest/rest";
+import {Card} from "../../model/card";
+import {number} from "ng2-validation/dist/number";
 
 /**
  * Generated class for the GamePage page.
@@ -17,9 +19,15 @@ import {RestProvider} from "../../providers/rest/rest";
   templateUrl: 'game.html',
 })
 export class GamePage {
+  card1: Card = new Card("1", "test1", "1");
+  card2: Card = new Card("2", "test2", "2");
+  card3: Card = new Card("3", "test3", "3");
 
-  session: Session;
-
+  session: Session = new Session();
+  cards: Card[];
+  cardCount: number[];
+  total: number;
+  messure: number[] = [];
 
   constructor(public navCtrl: NavController,
               public httpService: RestProvider,
@@ -56,10 +64,25 @@ export class GamePage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad GamePage');
+    console.log('fire');
+    this.cards = [this.card1, this.card2, this.card3];
+    this.cardCount = [0, 1, 2];
     let id = this.navParams.get('param1');
-    this.httpService.get('sessions/get/'+id).subscribe(data => {
+    //TODO HTTP call session
+    this.httpService.get('sessions/getSession/' + id).subscribe(data => {
       this.session = data;
-    })
+    });
+
+    for (let obj of this.cardCount) {
+      if (isNaN(this.messure[obj])) {
+        this.messure[obj] = 0;
+      }else {
+        this.messure[obj] += 1;
+      }
+    }
+  }
+
+  getRounds(numberOfRounds: number) {
+    return new Array(numberOfRounds);
   }
 }

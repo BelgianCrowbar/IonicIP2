@@ -1,3 +1,7 @@
+$size: 1em;
+$color: #e04020;
+$metal: #d5d5d5;
+
 page-game {
   .ion-md-share {
     color: #ED4248;
@@ -20,8 +24,42 @@ page-game {
     border-radius: 50%;
     height: 20px;
     width: 20px;
-    margin-left: 10%;
-    margin-top: 10%;
+  }
+
+  .ladder {
+    position: relative;
+    margin: 0 auto;
+    padding: 0;
+    max-width: $size * 12;
+    list-style: none;
+    overflow: auto;
+
+    &::before,
+    &::after {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      background: $color;
+      width: $size;
+      content: '';
+      box-shadow: 0 0 2px black;
+    }
+
+    &::before { left: 0; }
+    &::after  { right: 0; }
+
+    li {
+      margin: ($size * 4) 0;
+      padding: 0 ($size );
+      background: $metal;
+      height: $size;
+      text-align: center;
+      font-size: $size / 1.45;
+      line-height: 1.45;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 
   .white {
@@ -61,7 +99,7 @@ page-game {
 
   #content {
     position: relative;
-    width: 95vw;;
-    height: 95vw;
+    width: 95vw;
+    height: auto;
   }
 }

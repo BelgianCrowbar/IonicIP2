@@ -7,9 +7,6 @@
 <ion-header>
 
   <ion-navbar>
-    <button ion-button icon-only menuToggle side="left">
-      <ion-icon name="menu"></ion-icon>
-    </button>
 
     <ion-title>Game</ion-title>
   </ion-navbar>
@@ -20,48 +17,24 @@
 <ion-content padding>
 
 
-
   <div id="content">
 
-    <button *ngFor="let card of cards" (click)="presentActionSheet(card)" class="knop">{{card.get}}
-    </button>
+    <ul class="ladder">
+      <li *ngFor="let i of getRounds(session.numberOfRounds)"></li>
+    </ul>
 
-    <div class="blue circle">
-      <div class="white circle">
-        <div class="blue circle">
-          <div class="white circle">
-            <div class="blue circle">
-              <div class="white circle">
-                <div class="blue circle3">
-                  <div class="white circle3">
-                    <div class="blue circle3">
-                      <div class="white circle3">
-                        <div class="blue circle3">
-                          <div class="white circle3">
-                            <div class="blue circle2">
-                              <div class="white circle2">
+      <button *ngFor="let card of cards;  let i = index;" (click)="presentActionSheet(card)" class="knop"
+              [style.bottom]="cardCount[i] * 4 + 'em'"
+              [style.left]=" 8+this.messure[this.cardCount[i]]*4 + 'em'">
+        {{card.text}}, {{cardCount[i].toString()}}
+      </button>
 
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 
   <ion-list>
     <ion-item-sliding>
       <ion-item>
         Item1
-
       </ion-item>
       <ion-item-options side="left">
         <button ion-button (click)="showInfo(item)">show Info</button>
