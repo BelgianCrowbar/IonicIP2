@@ -46,7 +46,8 @@
     "jasmine-expect": "^3.8.3",
     "minimatch": "^3.0.4",
     "ng2-validation": "^4.2.0",
-    "typescript": "^2.7.1"
+    "typescript": "^2.7.1",
+    "angular2-uuid": "latest"
   },
   "devDependencies": {
     "connect": "^3.6.6",

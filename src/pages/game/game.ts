@@ -19,15 +19,9 @@ import {number} from "ng2-validation/dist/number";
   templateUrl: 'game.html',
 })
 export class GamePage {
-  card1: Card = new Card("1", "test1", "1");
-  card2: Card = new Card("2", "test2", "2");
-  card3: Card = new Card("3", "test3", "3");
-
+  degress: number = 360;
   session: Session = new Session();
   cards: Card[];
-  cardCount: number[];
-  total: number;
-  messure: number[] = [];
 
   constructor(public navCtrl: NavController,
               public httpService: RestProvider,
@@ -64,23 +58,34 @@ export class GamePage {
   }
 
   ionViewDidLoad() {
-    console.log('fire');
-    this.cards = [this.card1, this.card2, this.card3];
-    this.cardCount = [0, 1, 2];
     let id = this.navParams.get('param1');
-    //TODO HTTP call session
     this.httpService.get('sessions/getSession/' + id).subscribe(data => {
       this.session = data;
+      this.cards= this.session.subThemes[0].cards;
+      console.log(data);
     });
-
-    for (let obj of this.cardCount) {
-      if (isNaN(this.messure[obj])) {
-        this.messure[obj] = 0;
-      }else {
-        this.messure[obj] += 1;
-      }
-    }
   }
+
+  drawCirclePoints(i) {
+    this.degress -=15;
+    //TODO get Aantal stemmen
+    if (this.degress==0)this.degress=360;
+    console.log(this.degress);
+    let vote = 0;
+    let x = 0;
+    let y = 0;
+    let cx = 47.5;
+    let cy = 47.5;
+    let r = 47 - vote;
+    x = cx + r * Math.cos(this.degress);
+    y = cy + r * Math.sin(this.degress);
+    let styles = {
+      'top': x + '%',
+      'left': y + '%'
+    };
+    return styles;
+  }
+
 
   getRounds(numberOfRounds: number) {
     return new Array(numberOfRounds);

@@ -16,20 +16,32 @@
 
 <ion-content padding>
 
+  <div id="content" >
 
-  <div id="content">
+    <div id="outer-circle">
+      <div id="inner-circle">
+        <span id="inside-content"></span>
+        <div id="inner-circle2">
+          <span id="inside-content2"></span>
+          <div id="inner-circle3">
+            <span id="inside-content3"></span>
+            <div id="inner-circle4">
+              <span id="inside-content4"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <ul class="ladder">
-      <li *ngFor="let i of getRounds(session.numberOfRounds)"></li>
-    </ul>
-
-      <button *ngFor="let card of cards;  let i = index;" (click)="presentActionSheet(card)" class="knop"
-              [style.bottom]="cardCount[i] * 4 + 'em'"
-              [style.left]=" 8+this.messure[this.cardCount[i]]*4 + 'em'">
-        {{card.text}}, {{cardCount[i].toString()}}
-      </button>
+    <button *ngFor="let card of cards;  let i = index;"
+            (click)="presentActionSheet(card)" class="knop"
+            [ngStyle]="drawCirclePoints(i)">
+      {{i}}
+      <!--{{card.text}}, {{cardCount[i].toString()}}-->
+    </button>
 
   </div>
+
 
   <ion-list>
     <ion-item-sliding>
