@@ -26,7 +26,7 @@ export class SessionOverviewPage {
 
   ionViewDidLoad() {
 
-    this.restService.get('sessions/getAllSessionsByUser').subscribe(ses => {
+    this.restService.get('sessions/getAll').subscribe(ses => {
       console.log(ses);
       for (const obj of ses) {
         console.log(obj);

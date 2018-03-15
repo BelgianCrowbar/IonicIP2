@@ -38,7 +38,7 @@ export function jwtOptionsFactory(storage: Storage) {
     ProfilePage,
     SessionOverviewPage
   ],
-  imports: [
+    imports: [
     BrowserModule,
     HttpClientModule,
     JwtModule.forRoot({
