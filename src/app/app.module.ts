@@ -15,16 +15,15 @@ import {JWT_OPTIONS, JwtModule} from '@auth0/angular-jwt'
 import {HttpModule} from "@angular/http";
 import {GamePage} from "../pages/game/game";
 import {ProfilePage} from "../pages/profile/profile";
-import { RestProvider } from '../providers/rest/rest';
+import {RestProvider} from '../providers/rest/rest';
 import {SessionOverviewPage} from "../pages/session-overview/session-overview";
-
 
 
 export function jwtOptionsFactory(storage: Storage) {
   return {
     tokenGetter: () => storage.get('token'),
-   // whitelistedDomains: ['https://springip2.herokuapp.com/']
-    whitelistedDomains: ['http://localhost:8080/']
+    whitelistedDomains: ['https://springip2.herokuapp.com/']
+    //whitelistedDomains: ['http://localhost:8080/']
   }
 }
 
