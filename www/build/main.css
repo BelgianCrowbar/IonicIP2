@@ -25784,3 +25784,10 @@ page-game #inner-circle4 {
 #imgSelect {
   width: 85%;
 }
+
+ion-icon {
+  -webkit-box-ordinal-group: 11;
+  -webkit-order: 10;
+  -ms-flex-order: 10;
+  order: 10;
+}
