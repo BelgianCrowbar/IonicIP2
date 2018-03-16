@@ -5,6 +5,7 @@ import {Session} from "../../model/session";
 import {RestProvider} from "../../providers/rest/rest";
 import {Card} from "../../model/card";
 import {number} from "ng2-validation/dist/number";
+import {Picture} from "../../model/picture";
 
 /**
  * Generated class for the GamePage page.
@@ -22,6 +23,9 @@ export class GamePage {
   degress: number = 360;
   session: Session = new Session();
   cards: Card[];
+  isGood: boolean = true;
+  goodStyles: any[] = [];
+  imgsrc: any[] = [];
 
   constructor(public navCtrl: NavController,
               public httpService: RestProvider,
@@ -29,24 +33,18 @@ export class GamePage {
               public actionSheetCtrl: ActionSheetController) {
   }
 
-  presentActionSheet() {
+  presentActionSheet(card) {
     let actionSheet = this.actionSheetCtrl.create({
-      title: 'Cinema',
+      title: 'stem voor ' + card.text,
       buttons: [
         {
-          text: 'Film 1',
+          text: 'Stem',
           role: 'destructive',
           handler: () => {
-            console.log('Destructive clicked');
+            console.log('Stem');
           }
         }, {
-          text: 'Archive',
-
-          handler: () => {
-            console.log('Archive clicked');
-          }
-        }, {
-          text: 'Cancel',
+          text: 'Annuleren',
           role: 'cancel',
           handler: () => {
             console.log('Cancel clicked');
@@ -61,16 +59,16 @@ export class GamePage {
     let id = this.navParams.get('param1');
     this.httpService.get('sessions/getSession/' + id).subscribe(data => {
       this.session = data;
-      this.cards= this.session.subThemes[0].cards;
-      console.log(data);
+      this.cards = this.session.subThemes[0].cards;
+
     });
   }
 
   drawCirclePoints(i) {
-    this.degress -=15;
+    this.degress -= 15;
     //TODO get Aantal stemmen
-    if (this.degress==0)this.degress=360;
-    console.log(this.degress);
+    if (this.degress == 0) this.degress = 360;
+    console.log(i + ' ' + this.degress);
     let vote = 0;
     let x = 0;
     let y = 0;
@@ -79,13 +77,18 @@ export class GamePage {
     let r = 47 - vote;
     x = cx + r * Math.cos(this.degress);
     y = cy + r * Math.sin(this.degress);
+    let color = "rgb(" + Math.floor(Math.random() * 255) + "," + Math.floor(Math.random() * 255) + "," + Math.floor(Math.random() * 255) + ")";
     let styles = {
       'top': x + '%',
-      'left': y + '%'
+      'left': y + '%',
+      'background': color
     };
+    this.goodStyles[i] = styles;
+    if (i == this.cards.length - 1) {
+      this.isGood = false;
+    }
     return styles;
   }
-
 
   getRounds(numberOfRounds: number) {
     return new Array(numberOfRounds);

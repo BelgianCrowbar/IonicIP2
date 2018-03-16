@@ -25705,7 +25705,6 @@ page-game .action-sheet-destructive ion-icon {
 
 page-game .knop {
   position: absolute;
-  background: red;
   border-radius: 50%;
   height: 5%;
   width: 5%;
@@ -25769,6 +25768,11 @@ page-game #inner-circle4 {
     */
   top: 40%;
   left: 40%;
+}
+
+page-game ion-item {
+  position: relative;
+  left: 0 !important;
 }
 
 .action-sheets-basic-page {

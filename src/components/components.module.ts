@@ -4,10 +4,8 @@ import {IonicModule} from "ionic-angular";
 
 @NgModule({
   declarations: [CardComponent],
-  schemas: [NO_ERRORS_SCHEMA],
   imports: [IonicModule],
   exports: [CardComponent],
-  entryComponents: [CardComponent],
 
 })
 export class ComponentsModule {

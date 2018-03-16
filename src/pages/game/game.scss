@@ -19,7 +19,6 @@ page-game {
 
   .knop {
     position: absolute;
-    background: red;
     border-radius: 50%;
     height: 5%;
     width: 5%;
@@ -83,6 +82,11 @@ page-game {
     */
     top: 40%;
     left: 40%;
+  }
+
+  ion-item{
+    position: relative;
+    left: 0!important;
   }
 
 }

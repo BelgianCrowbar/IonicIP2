@@ -68,8 +68,6 @@ export class ProfilePage {
           } else {
             this.stoploading();
           }
-
-
         }, error2 => {
           this.stoploading();
           this.handleError(error2);

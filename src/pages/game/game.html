@@ -16,7 +16,7 @@
 
 <ion-content padding>
 
-  <div id="content" >
+  <div id="content">
 
     <div id="outer-circle">
       <div id="inner-circle">
@@ -35,42 +35,24 @@
 
     <button *ngFor="let card of cards;  let i = index;"
             (click)="presentActionSheet(card)" class="knop"
-            [ngStyle]="drawCirclePoints(i)">
-      {{i}}
-      <!--{{card.text}}, {{cardCount[i].toString()}}-->
+            [ngStyle]="isGood ? drawCirclePoints(i) : goodStyles[i]">
     </button>
 
   </div>
 
 
   <ion-list>
-    <ion-item-sliding>
-      <ion-item>
-        Item1
-      </ion-item>
-      <ion-item-options side="left">
-        <button ion-button (click)="showInfo(item)">show Info</button>
-        <button ion-button color="danger" (click)="share(item)">Share</button>
-      </ion-item-options>
+    <div *ngFor="let card of cards; let i = index;">
+      <app-card [style]="goodStyles[i]" (click)="presentActionSheet(card)" [vCard]="card"></app-card>
+    </div>
 
-      <ion-item-options side="right">
-        <button ion-button (click)="choose(item)">Choose</button>
-      </ion-item-options>
-    </ion-item-sliding>
-
-    <ion-item-sliding>
-      <ion-item>
-        Item2
-
-      </ion-item>
-      <ion-item-options side="left">
-        <button ion-button (click)="showInfo(item)">show Info</button>
-        <button ion-button color="danger" (click)="share(item)">Share</button>
-      </ion-item-options>
-
-      <ion-item-options side="right">
-        <button ion-button (click)="choose(item)">Choose</button>
-      </ion-item-options>
-    </ion-item-sliding>
+    <!-- <ion-item *ngFor="let card of cards; let i = index;"
+    [ngStyle]="goodStyles[i]"
+                 " ">
+         <ion-thumbnail item-start>
+           <img *ngIf="card.pictureId != null && card.pictureId != ''" src="{{imgurl(card)}}" >
+         </ion-thumbnail>*/
+         <h2> {{card.text}}</h2>
+       </ion-item>-->
   </ion-list>
 </ion-content>

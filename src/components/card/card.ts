@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {Card} from "../../model/card";
+import {RestProvider} from "../../providers/rest/rest";
 
 /**
  * Generated class for the CardComponent component.
@@ -15,32 +16,22 @@ export class CardComponent {
   @Input()
   vCard: Card;
   @Input()
-  cardNr: number;
+  style: any;
 
-  degree: number=15;
-  text: string;
+  imgsrc: string = null;
 
-  constructor() {
+  constructor(private httpService: RestProvider) {
     console.log('Hello CardComponent Component');
   }
 
-  drawCirclePoints(i) {
-    console.log("test");
-    this.degree *=i;
-    //TODO get Aantal stemmen
-    let vote = 0;
-    let x = 0;
-    let y = 0;
-    let cx = 47.5;
-    let cy = 47.5;
-    let r = 47 - vote;
-    x = cx + r * Math.cos(this.degree);
-    y = cy + r * Math.sin(this.degree);
-    let styles = {
-      'top': x + '%',
-      'left': y + '%'
-    };
-    return styles;
+  ngOnInit() {
+    console.log(this.style);
+    if (this.vCard.pictureId != null && this.vCard.pictureId != '') {
+      this.httpService.get('pictures/get/' + this.vCard.pictureId).subscribe(data => {
+          this.imgsrc = "data:image/png;base64," + data.value;
+        }
+      )
+    }
   }
 
 }

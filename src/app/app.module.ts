@@ -41,9 +41,6 @@ export function jwtOptionsFactory(storage: Storage) {
     ProfilePage,
     SessionOverviewPage,
   ],
-  schemas: [
-    NO_ERRORS_SCHEMA
-  ],
   imports: [
     BrowserModule,
     HttpClientModule,
