@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule, ErrorHandler, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
+import {NgModule, ErrorHandler} from '@angular/core';
 import {IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
 import {MyApp} from './app.component';
 import {HomePage} from '../pages/home/home';
@@ -20,13 +20,14 @@ import {SessionOverviewPage} from "../pages/session-overview/session-overview";
 import {ComponentsModule} from "../components/components.module";
 import {CardComponent} from "../components/card/card";
 
+import {CardsPage} from "../pages/cards/cards";
 
 
 export function jwtOptionsFactory(storage: Storage) {
   return {
     tokenGetter: () => storage.get('token'),
-   // whitelistedDomains: ['https://springip2.herokuapp.com/']
-    whitelistedDomains: ['http://localhost:8080/']
+    whitelistedDomains: ['https://springip2.herokuapp.com/']
+    //whitelistedDomains: ['http://localhost:8080/']
   }
 }
 
@@ -40,6 +41,7 @@ export function jwtOptionsFactory(storage: Storage) {
     GamePage,
     ProfilePage,
     SessionOverviewPage,
+    CardsPage
   ],
   imports: [
     BrowserModule,
@@ -65,6 +67,7 @@ export function jwtOptionsFactory(storage: Storage) {
     GamePage,
     ProfilePage,
     SessionOverviewPage,
+    CardsPage
   ],
   providers: [
     StatusBar,
@@ -72,8 +75,7 @@ export function jwtOptionsFactory(storage: Storage) {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
     RestProvider,
-  ],
-
+  ]
 })
 export class AppModule {
 }

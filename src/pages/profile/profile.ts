@@ -12,6 +12,8 @@ import {SERVER_URL} from "../../config";
 import {RequestOptions, RequestOptionsArgs} from "@angular/http";
 import {Picture} from "../../model/picture";
 import {error} from "util";
+import {SessionOverviewPage} from "../session-overview/session-overview";
+import {HomePage} from "../home/home";
 
 
 /**
@@ -88,6 +90,7 @@ export class ProfilePage {
                 this.user.firstName = value.firstName;
                 this.stoploading();
                 this.handleSucces();
+                this.navCtrl.setRoot(HomePage);
               }
               ,
               error2 => {

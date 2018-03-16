@@ -13,13 +13,14 @@ export class Session {
   timeUserRound: number;
   startTime: Date;
   sessionName: string;
+  suggestedCards: Card[];
   subThemes: SubTheme[];
   cards: Card[];
-  suggestedCards: Card[];
   organiser: string;
   active: boolean;
 
   constructor() {
+    this.suggestedCards = new Array<Card>();
     this.subThemes = new Array<SubTheme>();
     this.cards = new Array<Card>();
     this.players = new Array<string>();

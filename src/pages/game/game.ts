@@ -25,7 +25,6 @@ export class GamePage {
   cards: Card[];
   isGood: boolean = true;
   goodStyles: any[] = [];
-  imgsrc: any[] = [];
 
   constructor(public navCtrl: NavController,
               public httpService: RestProvider,
@@ -35,7 +34,7 @@ export class GamePage {
 
   presentActionSheet(card) {
     let actionSheet = this.actionSheetCtrl.create({
-      title: 'stem voor ' + card.text,
+      title: 'Stem voor ' + card.text,
       buttons: [
         {
           text: 'Stem',
@@ -59,7 +58,7 @@ export class GamePage {
     let id = this.navParams.get('param1');
     this.httpService.get('sessions/getSession/' + id).subscribe(data => {
       this.session = data;
-      this.cards = this.session.subThemes[0].cards;
+      this.cards = this.session.cards;
 
     });
   }

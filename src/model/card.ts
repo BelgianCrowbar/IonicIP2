@@ -1,13 +1,18 @@
+import {UUID} from 'angular2-uuid';
+import {Review} from "./review";
+
 export class Card {
 
   id: string;
   text: string;
   pictureId: string;
+  reviews: Review[];
 
-
-  constructor(id: string, text: string, pictureId: string) {
-    this.id = id;
+  constructor(text: string) {
     this.text = text;
-    this.pictureId = pictureId;
+    this.id = UUID.UUID();
+    this.reviews = [];
+    this.pictureId=null;
   }
 }
+

@@ -14,25 +14,18 @@
         Home
       </button>
       <button ion-item menuClose (click)="sessionsPage()">
-        Sessions
+        Sessies
       </button>
       <button ion-item menuClose (click)="profilePage()">
-        Profile
+        Profiel
+      </button>
+      <button ion-item menuClose (click)="logout()">
+        Uitloggen
+      </button>
+      <button ion-item menuClose (click)="exitApp()">
+        Vertrek
       </button>
     </ion-list>
   </ion-content>
-  <ion-footer class="bar-light">
-    <div class="button-bar">
-      <button class="button button-icon icon " side="left" menuClose (click)="logout()">
-        <ion-icon name="exit"></ion-icon>
-        Logout
-      </button>
-      <button class="button button-icon icon ion-log-out" side="right" (click)="exitApp()">
-
-        <ion-icon name="close"></ion-icon>
-        Exit
-      </button>
-    </div>
-  </ion-footer>
 </ion-menu>
 <ion-nav  [root]="rootPage" #content></ion-nav>

@@ -15,16 +15,24 @@
 </ion-header>
 
 <ion-content padding>
-  <div>Gepland</div>
+  <div class="row">
+    <h5>Gepland</h5>
+    <ion-icon ios="ios-clipboard" md="md-clipboard" padding-left=""></ion-icon>
+  </div>
   <ion-list>
     <ion-item *ngFor="let session of activeSessions" (click)='playSession(session.sessionId)'>{{session.sessionName}}</ion-item>
   </ion-list>
-  <div>Actief</div>
+  <div class="row">
+    <h5>Actief</h5>
+    <ion-icon ios="ios-ionic" md="md-ionic" padding-left=""></ion-icon>
+  </div>
   <ion-list>
-    <button *ngFor="let session of plannedSessions" (click)='playSession(session.sessionId)'>{{session.sessionName}}</button>
-    <button *ngFor="let session of plannedSessions" (click)='playSession(session.sessionId)'>{{session.sessionName}}</button>
+    <ion-item *ngFor="let session of plannedSessions">{{session.sessionName}}</ion-item>
   </ion-list>
-  <div>Gestopt</div>
+  <div class="row">
+    <h5>Gestopt</h5>
+    <ion-icon ios="ios-lock" md="md-lock" padding-left></ion-icon>
+  </div>
   <ion-list>
     <ion-item *ngFor="let session of stoppedSessions">{{session.sessionName}}</ion-item>
   </ion-list>

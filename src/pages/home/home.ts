@@ -5,6 +5,7 @@ import {AuthProvider} from "../../providers/auth/auth";
 import {HttpClient} from "@angular/common/http";
 import {ProfilePage} from "../profile/profile";
 import {SessionOverviewPage} from "../session-overview/session-overview";
+import {CardsPage} from "../cards/cards";
 
 
 @Component({
