@@ -17,6 +17,7 @@ import {GamePage} from "../pages/game/game";
 import {ProfilePage} from "../pages/profile/profile";
 import {RestProvider} from '../providers/rest/rest';
 import {SessionOverviewPage} from "../pages/session-overview/session-overview";
+import {CardsPage} from "../pages/cards/cards";
 
 
 export function jwtOptionsFactory(storage: Storage) {
@@ -36,7 +37,8 @@ export function jwtOptionsFactory(storage: Storage) {
     RegisterPage,
     GamePage,
     ProfilePage,
-    SessionOverviewPage
+    SessionOverviewPage,
+    CardsPage
   ],
     imports: [
     BrowserModule,
@@ -60,7 +62,8 @@ export function jwtOptionsFactory(storage: Storage) {
     RegisterPage,
     GamePage,
     ProfilePage,
-    SessionOverviewPage
+    SessionOverviewPage,
+    CardsPage
   ],
   providers: [
     StatusBar,

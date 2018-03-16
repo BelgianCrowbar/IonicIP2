@@ -17,7 +17,7 @@
 <ion-content padding>
   <div>Gepland</div>
   <ion-list>
-    <ion-item *ngFor="let session of activeSessions">{{session.sessionName}}</ion-item>
+    <ion-item *ngFor="let session of activeSessions" (click)="presentActionSheet(session)">{{session.sessionName}}</ion-item>
   </ion-list>
   <div>Actief</div>
   <ion-list>

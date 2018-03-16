@@ -1,7 +1,8 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {ActionSheetController, IonicPage, NavController, NavParams} from 'ionic-angular';
 import {RestProvider} from "../../providers/rest/rest";
 import {Session} from "../../model/session";
+import {CardsPage} from "../cards/cards";
 
 /**
  * Generated class for the SessionOverviewPage page.
@@ -21,7 +22,9 @@ export class SessionOverviewPage {
   stoppedSessions: Session[] = [];
 
 
-  constructor(private restService: RestProvider) {
+  constructor(private restService: RestProvider,
+              public actionSheetCtrl: ActionSheetController,
+              public navCtrl: NavController) {
   }
 
   ionViewDidLoad() {
@@ -30,12 +33,37 @@ export class SessionOverviewPage {
       console.log(ses);
       for (const obj of ses) {
         console.log(obj);
-        if (obj.startTime > new Date()) {
+        if (obj.startTime < new Date()) {
           this.plannedSessions.push(obj);
-        } else if (obj.startTime < new Date()) {
+        } else if (obj.startTime > new Date()) {
           this.activeSessions.push(obj);
         }
       }
     },error2 => console.log(error2));
+  }
+
+  presentActionSheet(session) {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Add cards',
+      buttons: [
+        {
+          text: 'Add',
+          role: 'add',
+          handler: () => {
+            console.log('Add clicked');
+            this.navCtrl.push(CardsPage, {
+              param1: session
+            });
+          }
+        },{
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
   }
 }
