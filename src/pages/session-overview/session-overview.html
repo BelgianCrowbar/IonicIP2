@@ -20,7 +20,7 @@
     <ion-icon ios="ios-clipboard" md="md-clipboard" padding-left=""></ion-icon>
   </div>
   <ion-list>
-    <ion-item *ngFor="let session of activeSessions" (click)="presentActionSheet(session)">{{session.sessionName}}
+    <ion-item *ngFor="let session of plannedSessions" (click)="addCard(session)">{{session.sessionName}}
     </ion-item>
   </ion-list>
   <div class="row">
@@ -28,7 +28,7 @@
     <ion-icon ios="ios-ionic" md="md-ionic" padding-left=""></ion-icon>
   </div>
   <ion-list>
-    <ion-item *ngFor="let session of plannedSessions">{{session.sessionName}}</ion-item>
+    <ion-item *ngFor="let session of activeSessions" (click)="playGame(session)">{{session.sessionName}}</ion-item>
   </ion-list>
   <div class="row">
     <h5>Gestopt</h5>

@@ -21,7 +21,7 @@
     <ion-list>
       <ion-item>
         <ion-label>
-          <h1>Beschrijving</h1>
+          <h1 style="color: #488aff">Beschrijving</h1>
         </ion-label>
       </ion-item>
 
@@ -32,7 +32,7 @@
 
       <ion-item>
         <ion-label>
-          <h1>Afbeelding toevoegen</h1>
+          <h1 style="color: #488aff">Afbeelding toevoegen</h1>
         </ion-label>
       </ion-item>
 
@@ -47,7 +47,7 @@
       </ion-item>
     </ion-list>
 
-    <button ion-button round full color="secondary" type="submit" [disabled]="!form.valid">Opslaan</button>
+    <button ion-button round full style="background-color: lightgreen" type="submit" [disabled]="!form.valid">Opslaan</button>
   </form>
-  <button ion-button round full color="danger" (click)="cancel()">Cancel</button>
+  <button ion-button round full style="background-color: tomato" (click)="cancel()">Cancel</button>
 </ion-content>

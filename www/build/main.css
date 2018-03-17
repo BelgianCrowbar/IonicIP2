@@ -25773,6 +25773,10 @@ page-game #inner-circle4 {
   text-align: center;
 }
 
+ion-icon {
+  font-size: 30px;
+}
+
 .content {
   width: 100%;
   overflow: hidden;

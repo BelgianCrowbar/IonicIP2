@@ -7,14 +7,45 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding class="action-sheets-basic-page">
+<ion-content class="action-sheets-basic-page">
   <p class="mid">Welcome <strong>{{user}}</strong></p>
 
   <ion-grid>
     <ion-row>
-      <button col-12 ion-button round (click)="overviewPage()">Overzicht Sessies</button>
-      <button col-12 ion-button round (click)="profilePage()">Profiel</button>
-      <button col-12 ion-button round (click)="logout()">Logout</button>
+      <button style="height: 100px" ios="ios-albums-outline" ion-button block (click)="overviewPage()">
+        <div>
+          <label>
+            Overzicht Sessies
+          </label>
+          <br>
+          <ion-icon ios="ios-albums-outline"></ion-icon>
+        </div>
+      </button>
+
+
+      <button style="height: 100px" ion-button block (click)="profilePage()">
+        <div>
+          <label>
+            Profiel
+          </label>
+          <br>
+          <ion-icon ios="ios-contact-outline"></ion-icon>
+        </div>
+      </button>
+
+      <button style="height: 100px" ion-button block (click)="logout()">
+        <div>
+          <label>
+            Logout
+          </label>
+          <br>
+          <ion-icon ios="ios-exit-outline"></ion-icon>
+        </div>
+      </button>
     </ion-row>
   </ion-grid>
+
 </ion-content>
+
+
+

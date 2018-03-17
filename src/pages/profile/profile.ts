@@ -160,4 +160,8 @@ export class ProfilePage {
       position: 'bottom'
     }).present();
   }
+
+  cancel() {
+    this.navCtrl.setRoot(HomePage);
+  }
 }

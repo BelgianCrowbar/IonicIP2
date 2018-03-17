@@ -3,6 +3,7 @@ import {ActionSheetController, IonicPage, NavController, NavParams} from 'ionic-
 import {RestProvider} from "../../providers/rest/rest";
 import {Session} from "../../model/session";
 import {CardsPage} from "../cards/cards";
+import {GamePage} from "../game/game";
 
 /**
  * Generated class for the SessionOverviewPage page.
@@ -33,16 +34,16 @@ export class SessionOverviewPage {
       console.log(ses);
       for (const obj of ses) {
         console.log(obj);
-        if (obj.startTime < new Date()) {
+        if (obj.startTime > new Date()) {
           this.plannedSessions.push(obj);
-        } else if (obj.startTime > new Date()) {
+        } else if (obj.startTime < new Date()) {
           this.activeSessions.push(obj);
         }
       }
     },error2 => console.log(error2));
   }
 
-  presentActionSheet(session) {
+  addCard(session) {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Add cards',
       buttons: [
@@ -52,6 +53,31 @@ export class SessionOverviewPage {
           handler: () => {
             console.log('Add clicked');
             this.navCtrl.push(CardsPage, {
+              param1: session
+            });
+          }
+        },{
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
+  playGame(session: Session) {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Spel spelen',
+      buttons: [
+        {
+          text: 'Play',
+          role: 'play',
+          handler: () => {
+            console.log('Play clicked');
+            this.navCtrl.push(GamePage, {
               param1: session
             });
           }
