@@ -1,5 +1,11 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {ActionSheetController, IonicPage, NavController, NavParams} from 'ionic-angular';
+import {SessionOverviewPage} from "../session-overview/session-overview";
+import {Session} from "../../model/session";
+import {RestProvider} from "../../providers/rest/rest";
+import {Card} from "../../model/card";
+import {number} from "ng2-validation/dist/number";
+import {Picture} from "../../model/picture";
 
 /**
  * Generated class for the GamePage page.
@@ -14,28 +20,30 @@ import {ActionSheetController, IonicPage, NavController, NavParams} from 'ionic-
   templateUrl: 'game.html',
 })
 export class GamePage {
+  degress: number = 360;
+  session: Session = new Session();
+  cards: Card[];
+  isGood: boolean = true;
+  goodStyles: any[] = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public actionSheetCtrl: ActionSheetController) {
+  constructor(public navCtrl: NavController,
+              public httpService: RestProvider,
+              public navParams: NavParams,
+              public actionSheetCtrl: ActionSheetController) {
   }
 
-  presentActionSheet() {
+  presentActionSheet(card) {
     let actionSheet = this.actionSheetCtrl.create({
-      title: 'Cinema',
+      title: 'Stem voor ' + card.text,
       buttons: [
         {
-          text: 'Film 1',
+          text: 'Stem',
           role: 'destructive',
           handler: () => {
-            console.log('Destructive clicked');
+            console.log('Stem');
           }
         }, {
-          text: 'Archive',
-
-          handler: () => {
-            console.log('Archive clicked');
-          }
-        }, {
-          text: 'Cancel',
+          text: 'Annuleren',
           role: 'cancel',
           handler: () => {
             console.log('Cancel clicked');
@@ -47,7 +55,41 @@ export class GamePage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad GamePage');
+    let id = this.navParams.get('param1');
+    this.httpService.get('sessions/getSession/' + id).subscribe(data => {
+      this.session = data;
+      this.cards = this.session.cards;
+
+    });
   }
 
+  drawCirclePoints(i) {
+    this.degress -= 15;
+    //TODO get Aantal stemmen
+    if (this.degress == 0) this.degress = 360;
+    console.log(i + ' ' + this.degress);
+    let vote = 0;
+    let x = 0;
+    let y = 0;
+    let cx = 47.5;
+    let cy = 47.5;
+    let r = 47 - vote;
+    x = cx + r * Math.cos(this.degress);
+    y = cy + r * Math.sin(this.degress);
+    let color = "rgb(" + Math.floor(Math.random() * 255) + "," + Math.floor(Math.random() * 255) + "," + Math.floor(Math.random() * 255) + ")";
+    let styles = {
+      'top': x + '%',
+      'left': y + '%',
+      'background': color
+    };
+    this.goodStyles[i] = styles;
+    if (i == this.cards.length - 1) {
+      this.isGood = false;
+    }
+    return styles;
+  }
+
+  getRounds(numberOfRounds: number) {
+    return new Array(numberOfRounds);
+  }
 }

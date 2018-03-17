@@ -43,6 +43,11 @@ export class SessionOverviewPage {
     },error2 => console.log(error2));
   }
 
+  playSession(id: string) {
+    console.log('Go Game Page');
+    this.navCtrl.push(GamePage, {param1: id})
+  }
+
   addCard(session) {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Add cards',

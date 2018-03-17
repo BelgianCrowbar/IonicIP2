@@ -15,8 +15,11 @@ import {JWT_OPTIONS, JwtModule} from '@auth0/angular-jwt'
 import {HttpModule} from "@angular/http";
 import {GamePage} from "../pages/game/game";
 import {ProfilePage} from "../pages/profile/profile";
-import {RestProvider} from '../providers/rest/rest';
+import { RestProvider } from '../providers/rest/rest';
 import {SessionOverviewPage} from "../pages/session-overview/session-overview";
+import {ComponentsModule} from "../components/components.module";
+import {CardComponent} from "../components/card/card";
+
 import {CardsPage} from "../pages/cards/cards";
 
 
@@ -40,7 +43,7 @@ export function jwtOptionsFactory(storage: Storage) {
     SessionOverviewPage,
     CardsPage
   ],
-    imports: [
+  imports: [
     BrowserModule,
     HttpClientModule,
     JwtModule.forRoot({
@@ -52,7 +55,8 @@ export function jwtOptionsFactory(storage: Storage) {
     }),
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
-    CustomFormsModule
+    CustomFormsModule,
+    ComponentsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
