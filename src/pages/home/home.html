@@ -8,12 +8,13 @@
 </ion-header>
 
 <ion-content padding class="action-sheets-basic-page">
-  Welcome <strong>{{user}}</strong>
+  <p class="mid">Welcome <strong>{{user}}</strong></p>
 
   <ion-grid>
     <ion-row>
       <button col-12 ion-button round (click)="overviewPage()">Overzicht Sessies</button>
       <button col-12 ion-button round (click)="profilePage()">Profiel</button>
+      <button col-12 ion-button round (click)="logout()">Logout</button>
     </ion-row>
   </ion-grid>
 </ion-content>

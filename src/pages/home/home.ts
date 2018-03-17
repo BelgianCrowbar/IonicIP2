@@ -40,4 +40,8 @@ export class HomePage {
   overviewPage() {
     this.navCtrl.setRoot(SessionOverviewPage)
   }
+
+  logout() {
+    this.authProvider.logout();
+  }
 }

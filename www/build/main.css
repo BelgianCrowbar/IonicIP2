@@ -25769,6 +25769,10 @@ page-game #inner-circle4 {
   margin: -150px 0px 0px -150px;
 }
 
+.mid {
+  text-align: center;
+}
+
 .content {
   width: 100%;
   overflow: hidden;
