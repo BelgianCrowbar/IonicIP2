@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {ActionSheetController, IonicPage, NavController, NavParams} from 'ionic-angular';
 import {RestProvider} from "../../providers/rest/rest";
 import {Session} from "../../model/session";
+import {GamePage} from "../game/game";
 import {CardsPage} from "../cards/cards";
 
 /**
@@ -40,6 +41,11 @@ export class SessionOverviewPage {
         }
       }
     },error2 => console.log(error2));
+  }
+
+  playSession(id: string) {
+    console.log('Go Game Page');
+    this.navCtrl.push(GamePage, {param1: id})
   }
 
   presentActionSheet(session) {

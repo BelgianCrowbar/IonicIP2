@@ -20,8 +20,7 @@ export class HomePage {
   constructor(private readonly authProvider: AuthProvider,
               jwtHelper: JwtHelperService,
               private readonly httpClient: HttpClient,
-              public navCtrl: NavController,
-              public navParams: NavParams) {
+              public navCtrl: NavController) {
     this.authProvider.authUser.subscribe(jwt => {
       if (jwt) {
         const decoded = jwtHelper.decodeToken(jwt);
