@@ -1,12 +1,10 @@
 import {Component} from '@angular/core';
-import {ActionSheetController, NavController, NavParams} from 'ionic-angular';
+import { NavController} from 'ionic-angular';
 import {JwtHelperService} from "@auth0/angular-jwt";
 import {AuthProvider} from "../../providers/auth/auth";
 import {HttpClient} from "@angular/common/http";
 import {ProfilePage} from "../profile/profile";
 import {SessionOverviewPage} from "../session-overview/session-overview";
-import {CardsPage} from "../cards/cards";
-
 
 @Component({
   selector: 'page-home',

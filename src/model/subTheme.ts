@@ -1,6 +1,5 @@
 import {Card} from './card';
 import {UUID} from 'angular2-uuid';
-import {Picture} from './Picture';
 
 export class SubTheme {
 
