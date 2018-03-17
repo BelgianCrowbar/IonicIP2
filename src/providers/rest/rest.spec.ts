@@ -36,7 +36,7 @@ describe('RestProvider', () => {
   });
 
   it('Test the get current user function', () => {
-    const testUser: User = new User("tim.vanaelst@student.kdg.be", 'Tim12', "Van Aelst");
+    const testUser: User = new User("tim.vanaelst@student.kdg.be", 'Tim12', "Van Aelst", "");
 
     myProvider.get("users/currentuser", null, token).subscribe(
       data => {

@@ -56,10 +56,10 @@ export class GamePage {
 
   ionViewDidLoad() {
     let id = this.navParams.get('param1');
-    this.httpService.get('sessions/getSession/' + id).subscribe(data => {
+    this.httpService.get('sessions/getSession/' + id.sessionId).subscribe(data => {
       this.session = data;
       this.cards = this.session.cards;
-
+      console.log(this.session.cards.length);
     });
   }
 
