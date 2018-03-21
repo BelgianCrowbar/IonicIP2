@@ -2,6 +2,7 @@ import {User} from "./user";
 import {Theme} from "./theme";
 import {Card} from "./card";
 import {SubTheme} from "./subTheme";
+import {Turn} from "./turn";
 
 export class Session {
   sessionId: string;
@@ -18,6 +19,7 @@ export class Session {
   cards: Card[];
   organiser: string;
   active: boolean;
+  turns: Turn[];
 
   constructor() {
     this.suggestedCards = new Array<Card>();
@@ -25,6 +27,7 @@ export class Session {
     this.cards = new Array<Card>();
     this.players = new Array<string>();
     this.suggestedCards = new Array<Card>();
+    this.turns = new Array<Turn>();
   }
 
 

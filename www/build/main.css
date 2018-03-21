@@ -25775,6 +25775,10 @@ page-game ion-item {
   left: 0 !important;
 }
 
+page-game ion-list {
+  margin-top: 1em !important;
+}
+
 .mid {
   text-align: center;
 }

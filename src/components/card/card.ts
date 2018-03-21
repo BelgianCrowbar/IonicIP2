@@ -16,16 +16,21 @@ export class CardComponent {
   @Input()
   vCard: Card;
   @Input()
+  vote: any;
+  @Input()
   style: any;
 
   imgsrc: string = null;
 
   constructor(private httpService: RestProvider) {
-    console.log('Hello CardComponent Component');
   }
 
   ngOnInit() {
-    console.log(this.style);
+    console.log(this.vote.votes.get(this.vCard.id));
+    this.vote = this.vote.votes.get(this.vCard.id);
+    if (this.vote == undefined) {
+      this.vote = 0
+    }
     if (this.vCard.pictureId != null && this.vCard.pictureId != '') {
       this.httpService.get('pictures/get/' + this.vCard.pictureId).subscribe(data => {
           this.imgsrc = "data:image/png;base64," + data.value;
