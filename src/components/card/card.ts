@@ -20,18 +20,18 @@ export class CardComponent {
   @Input()
   style: any;
 
+  voteCard:number =0;
+
   imgsrc: string = null;
 
   constructor(private httpService: RestProvider) {
   }
 
   ngOnInit() {
-    if (this.vote == undefined) {
-      this.vote = this.vote.votes.get(this.vCard.id);
-      if (this.vote == undefined) {
-        this.vote = 0
-      }
+    if (this.vote !== undefined && this.vote.votes.get(this.vCard.id) !== undefined) {
+      this.voteCard = this.vote.votes.get(this.vCard.id);
     }
+
     if (this.vCard.pictureId != null && this.vCard.pictureId != '') {
       this.httpService.get('pictures/get/' + this.vCard.pictureId).subscribe(data => {
           this.imgsrc = "data:image/png;base64," + data.value;

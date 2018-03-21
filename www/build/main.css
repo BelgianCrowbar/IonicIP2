@@ -25710,6 +25710,14 @@ page-game .knop {
   width: 5%;
 }
 
+page-game .currentPlayer {
+  margin-bottom: 1em;
+}
+
+page-game .currentPlayer div {
+  text-align: center;
+}
+
 page-game #content {
   position: relative;
   width: 95vw;

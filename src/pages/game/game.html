@@ -15,6 +15,11 @@
 
 <ion-content padding>
 
+
+  <div class="currentPlayer" *ngIf="sessionState !== undefined">
+    <div>Speler aan zet:  <strong>{{sessionState.nextPlayer}}</strong></div>
+  </div>
+
   <div id="content">
 
     <div id="outer-circle">
@@ -41,6 +46,7 @@
 
   <ion-list>
     <app-card *ngFor="let card of cards; let i = index;"
-              [style]="goodStyles[i]" (click)="presentActionSheet(card)" [vCard]="card" [vote]="sessionState"></app-card>
+              [style]="goodStyles[i]" (click)="presentActionSheet(card)" [vCard]="card"
+              [vote]="sessionState"></app-card>
   </ion-list>
 </ion-content>

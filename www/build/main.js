@@ -152,7 +152,7 @@ var GamePage = /** @class */ (function () {
             this.httpService.post('sessions/addTurn/' + this.session.sessionId, turn).subscribe(function (data) {
                 _this.getsession(_this.session.sessionId);
                 var toast = _this.toastCtrl.create({
-                    message: 'Uw stemde op ' + _this.cards.filter(function (a) { return a.id === cardId; }),
+                    message: 'Uw stemde',
                     duration: 5000,
                     position: 'bottom'
                 }).present();
@@ -161,17 +161,12 @@ var GamePage = /** @class */ (function () {
     };
     GamePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-game',template:/*ion-inline-start:"D:\KdG\3de jaar\IntegratieProject\Officieel\IonicIP2\src\pages\game\game.html"*/'<!--\n  Generated template for the GamePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>{{session.sessionName}}</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n  <div id="content">\n\n    <div id="outer-circle">\n      <div id="inner-circle">\n        <span id="inside-content"></span>\n        <div id="inner-circle2">\n          <span id="inside-content2"></span>\n          <div id="inner-circle3">\n            <span id="inside-content3"></span>\n          </div>\n        </div>\n      </div>\n    </div>\n\n\n    <button *ngFor="let card of cards; let i = index;"\n            (click)="presentActionSheet(card)" class="knop"\n            [ngStyle]="isGood ? drawCirclePoints(card,i) : goodStyles[i]">\n    </button>\n\n\n  </div>\n\n\n  <ion-list>\n    <app-card *ngFor="let card of cards; let i = index;"\n              [style]="goodStyles[i]" (click)="presentActionSheet(card)" [vCard]="card" [vote]="sessionState"></app-card>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"D:\KdG\3de jaar\IntegratieProject\Officieel\IonicIP2\src\pages\game\game.html"*/,
+            selector: 'page-game',template:/*ion-inline-start:"D:\KdG\3de jaar\IntegratieProject\Officieel\IonicIP2\src\pages\game\game.html"*/'<!--\n  Generated template for the GamePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>{{session.sessionName}}</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n\n  <div class="currentPlayer" *ngIf="sessionState !== undefined">\n    <div>Speler aan zet:  <strong>{{sessionState.nextPlayer}}</strong></div>\n  </div>\n\n  <div id="content">\n\n    <div id="outer-circle">\n      <div id="inner-circle">\n        <span id="inside-content"></span>\n        <div id="inner-circle2">\n          <span id="inside-content2"></span>\n          <div id="inner-circle3">\n            <span id="inside-content3"></span>\n          </div>\n        </div>\n      </div>\n    </div>\n\n\n    <button *ngFor="let card of cards; let i = index;"\n            (click)="presentActionSheet(card)" class="knop"\n            [ngStyle]="isGood ? drawCirclePoints(card,i) : goodStyles[i]">\n    </button>\n\n\n  </div>\n\n\n  <ion-list>\n    <app-card *ngFor="let card of cards; let i = index;"\n              [style]="goodStyles[i]" (click)="presentActionSheet(card)" [vCard]="card"\n              [vote]="sessionState"></app-card>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"D:\KdG\3de jaar\IntegratieProject\Officieel\IonicIP2\src\pages\game\game.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_3__providers_rest_rest__["a" /* RestProvider */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */],
-            __WEBPACK_IMPORTED_MODULE_5__providers_auth_auth__["a" /* AuthProvider */],
-            __WEBPACK_IMPORTED_MODULE_6__auth0_angular_jwt__["b" /* JwtHelperService */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ToastController */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__providers_rest_rest__["a" /* RestProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_rest_rest__["a" /* RestProvider */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_5__providers_auth_auth__["a" /* AuthProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__providers_auth_auth__["a" /* AuthProvider */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_6__auth0_angular_jwt__["b" /* JwtHelperService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__auth0_angular_jwt__["b" /* JwtHelperService */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ToastController */]) === "function" && _g || Object])
     ], GamePage);
     return GamePage;
+    var _a, _b, _c, _d, _e, _f, _g;
 }());
 
 //# sourceMappingURL=game.js.map
@@ -1532,14 +1527,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var CardComponent = /** @class */ (function () {
     function CardComponent(httpService) {
         this.httpService = httpService;
+        this.voteCard = 0;
         this.imgsrc = null;
     }
     CardComponent.prototype.ngOnInit = function () {
         var _this = this;
-        console.log(this.vote.votes.get(this.vCard.id));
-        this.vote = this.vote.votes.get(this.vCard.id);
-        if (this.vote == undefined) {
-            this.vote = 0;
+        if (this.vote !== undefined && this.vote.votes.get(this.vCard.id) !== undefined) {
+            this.voteCard = this.vote.votes.get(this.vCard.id);
         }
         if (this.vCard.pictureId != null && this.vCard.pictureId != '') {
             this.httpService.get('pictures/get/' + this.vCard.pictureId).subscribe(function (data) {
@@ -1561,7 +1555,7 @@ var CardComponent = /** @class */ (function () {
     ], CardComponent.prototype, "style", void 0);
     CardComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'app-card',template:/*ion-inline-start:"D:\KdG\3de jaar\IntegratieProject\Officieel\IonicIP2\src\components\card\card.html"*/'<ion-item [ngStyle]="style">\n  <ion-thumbnail item-end>\n    <img *ngIf="imgsrc != null && imgsrc != \'\'" src="{{imgsrc}}" >\n  </ion-thumbnail>\n  <h2> {{vCard.text}} heeft {{vote}} stemmen</h2>\n\n</ion-item>\n'/*ion-inline-end:"D:\KdG\3de jaar\IntegratieProject\Officieel\IonicIP2\src\components\card\card.html"*/
+            selector: 'app-card',template:/*ion-inline-start:"D:\KdG\3de jaar\IntegratieProject\Officieel\IonicIP2\src\components\card\card.html"*/'<ion-item [ngStyle]="style">\n  <ion-thumbnail item-end>\n    <img *ngIf="imgsrc != null && imgsrc != \'\'" src="{{imgsrc}}" >\n  </ion-thumbnail>\n  <h2> {{vCard.text}} heeft {{voteCard}} stemmen</h2>\n\n</ion-item>\n'/*ion-inline-end:"D:\KdG\3de jaar\IntegratieProject\Officieel\IonicIP2\src\components\card\card.html"*/
         }),
         __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__providers_rest_rest__["a" /* RestProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_rest_rest__["a" /* RestProvider */]) === "function" && _b || Object])
     ], CardComponent);

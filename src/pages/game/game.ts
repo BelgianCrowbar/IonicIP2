@@ -143,7 +143,7 @@ export class GamePage {
       this.httpService.post('sessions/addTurn/' + this.session.sessionId, turn).subscribe(data => {
         this.getsession(this.session.sessionId);
         const toast = this.toastCtrl.create({
-          message: 'Uw stemde op '+ this.cards.filter(a => a.id === cardId),
+          message: 'Uw stemde',
           duration: 5000,
           position: 'bottom'
         }).present();
