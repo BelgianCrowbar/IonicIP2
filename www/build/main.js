@@ -163,10 +163,15 @@ var GamePage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'page-game',template:/*ion-inline-start:"D:\KdG\3de jaar\IntegratieProject\Officieel\IonicIP2\src\pages\game\game.html"*/'<!--\n  Generated template for the GamePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>{{session.sessionName}}</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n\n  <div class="currentPlayer" *ngIf="sessionState !== undefined">\n    <div>Speler aan zet:  <strong>{{sessionState.nextPlayer}}</strong></div>\n  </div>\n\n  <div id="content">\n\n    <div id="outer-circle">\n      <div id="inner-circle">\n        <span id="inside-content"></span>\n        <div id="inner-circle2">\n          <span id="inside-content2"></span>\n          <div id="inner-circle3">\n            <span id="inside-content3"></span>\n          </div>\n        </div>\n      </div>\n    </div>\n\n\n    <button *ngFor="let card of cards; let i = index;"\n            (click)="presentActionSheet(card)" class="knop"\n            [ngStyle]="isGood ? drawCirclePoints(card,i) : goodStyles[i]">\n    </button>\n\n\n  </div>\n\n\n  <ion-list>\n    <app-card *ngFor="let card of cards; let i = index;"\n              [style]="goodStyles[i]" (click)="presentActionSheet(card)" [vCard]="card"\n              [vote]="sessionState"></app-card>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"D:\KdG\3de jaar\IntegratieProject\Officieel\IonicIP2\src\pages\game\game.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__providers_rest_rest__["a" /* RestProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_rest_rest__["a" /* RestProvider */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_5__providers_auth_auth__["a" /* AuthProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__providers_auth_auth__["a" /* AuthProvider */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_6__auth0_angular_jwt__["b" /* JwtHelperService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__auth0_angular_jwt__["b" /* JwtHelperService */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ToastController */]) === "function" && _g || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_3__providers_rest_rest__["a" /* RestProvider */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */],
+            __WEBPACK_IMPORTED_MODULE_5__providers_auth_auth__["a" /* AuthProvider */],
+            __WEBPACK_IMPORTED_MODULE_6__auth0_angular_jwt__["b" /* JwtHelperService */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ToastController */]])
     ], GamePage);
     return GamePage;
-    var _a, _b, _c, _d, _e, _f, _g;
 }());
 
 //# sourceMappingURL=game.js.map
@@ -1543,7 +1548,7 @@ var CardComponent = /** @class */ (function () {
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
-        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__model_card__["a" /* Card */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__model_card__["a" /* Card */]) === "function" && _a || Object)
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1__model_card__["a" /* Card */])
     ], CardComponent.prototype, "vCard", void 0);
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
@@ -1557,10 +1562,9 @@ var CardComponent = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-card',template:/*ion-inline-start:"D:\KdG\3de jaar\IntegratieProject\Officieel\IonicIP2\src\components\card\card.html"*/'<ion-item [ngStyle]="style">\n  <ion-thumbnail item-end>\n    <img *ngIf="imgsrc != null && imgsrc != \'\'" src="{{imgsrc}}" >\n  </ion-thumbnail>\n  <h2> {{vCard.text}} heeft {{voteCard}} stemmen</h2>\n\n</ion-item>\n'/*ion-inline-end:"D:\KdG\3de jaar\IntegratieProject\Officieel\IonicIP2\src\components\card\card.html"*/
         }),
-        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__providers_rest_rest__["a" /* RestProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_rest_rest__["a" /* RestProvider */]) === "function" && _b || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_rest_rest__["a" /* RestProvider */]])
     ], CardComponent);
     return CardComponent;
-    var _a, _b;
 }());
 
 //# sourceMappingURL=card.js.map
@@ -1622,7 +1626,7 @@ var HomePage = /** @class */ (function () {
     };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-home',template:/*ion-inline-start:"D:\KdG\3de jaar\IntegratieProject\Officieel\IonicIP2\src\pages\home\home.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <button ion-button icon-only menuToggle side="left">\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>Home</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content class="action-sheets-basic-page">\n\n  <p class="mid">Welcome <strong>{{user}}</strong></p>\n\n\n\n  <ion-grid>\n\n    <ion-row>\n\n      <button style="height: 100px" ios="ios-albums-outline" ion-button block (click)="overviewPage()">\n\n        <div>\n\n          <label>\n\n            Overzicht Sessies\n\n          </label>\n\n          <br>\n\n          <ion-icon ios="ios-albums-outline"></ion-icon>\n\n        </div>\n\n      </button>\n\n\n\n\n\n      <button style="height: 100px" ion-button block (click)="profilePage()">\n\n        <div>\n\n          <label>\n\n            Profiel\n\n          </label>\n\n          <br>\n\n          <ion-icon ios="ios-contact-outline"></ion-icon>\n\n        </div>\n\n      </button>\n\n\n\n      <button style="height: 100px" ion-button block (click)="logout()">\n\n        <div>\n\n          <label>\n\n            Logout\n\n          </label>\n\n          <br>\n\n          <ion-icon ios="ios-exit-outline"></ion-icon>\n\n        </div>\n\n      </button>\n\n    </ion-row>\n\n  </ion-grid>\n\n\n\n</ion-content>\n\n\n\n\n\n\n\n'/*ion-inline-end:"D:\KdG\3de jaar\IntegratieProject\Officieel\IonicIP2\src\pages\home\home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"D:\KdG\3de jaar\IntegratieProject\Officieel\IonicIP2\src\pages\home\home.html"*/'<ion-header>\n  <ion-navbar>\n    <button id="btnSideMenu" ion-button icon-only menuToggle side="left">\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Home</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content class="action-sheets-basic-page">\n  <p class="mid">Welcome <strong>{{user}}</strong></p>\n\n  <ion-grid>\n    <ion-row>\n      <button style="height: 100px" ios="ios-albums-outline" ion-button block (click)="overviewPage()">\n        <div>\n          <label>\n            Overzicht Sessies\n          </label>\n          <br>\n          <ion-icon ios="ios-albums-outline"></ion-icon>\n        </div>\n      </button>\n\n\n      <button style="height: 100px" ion-button block (click)="profilePage()" id="btnProfile">\n        <div>\n          <label>\n            Profiel\n          </label>\n          <br>\n          <ion-icon ios="ios-contact-outline"></ion-icon>\n        </div>\n      </button>\n\n      <button style="height: 100px" ion-button block (click)="logout()">\n        <div>\n          <label>\n            Logout\n          </label>\n          <br>\n          <ion-icon ios="ios-exit-outline"></ion-icon>\n        </div>\n      </button>\n    </ion-row>\n  </ion-grid>\n\n</ion-content>\n\n\n\n'/*ion-inline-end:"D:\KdG\3de jaar\IntegratieProject\Officieel\IonicIP2\src\pages\home\home.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__providers_auth_auth__["a" /* AuthProvider */],
             __WEBPACK_IMPORTED_MODULE_2__auth0_angular_jwt__["b" /* JwtHelperService */],

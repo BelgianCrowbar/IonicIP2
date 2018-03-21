@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button icon-only menuToggle side="left">
+    <button id="btnSideMenu" ion-button icon-only menuToggle side="left">
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Home</ion-title>
@@ -23,7 +23,7 @@
       </button>
 
 
-      <button style="height: 100px" ion-button block (click)="profilePage()">
+      <button style="height: 100px" ion-button block (click)="profilePage()" id="btnProfile">
         <div>
           <label>
             Profiel
