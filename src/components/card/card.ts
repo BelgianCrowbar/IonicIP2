@@ -26,10 +26,11 @@ export class CardComponent {
   }
 
   ngOnInit() {
-    console.log(this.vote.votes.get(this.vCard.id));
-    this.vote = this.vote.votes.get(this.vCard.id);
     if (this.vote == undefined) {
-      this.vote = 0
+      this.vote = this.vote.votes.get(this.vCard.id);
+      if (this.vote == undefined) {
+        this.vote = 0
+      }
     }
     if (this.vCard.pictureId != null && this.vCard.pictureId != '') {
       this.httpService.get('pictures/get/' + this.vCard.pictureId).subscribe(data => {
