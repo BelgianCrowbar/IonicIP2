@@ -43,6 +43,7 @@ describe('RestProvider', () => {
         expect(data.email).toEqual(testUser.email);
         expect(data.lastName).toEqual(testUser.lastName);
       });
+
     httpMock.verify();
   });
 
