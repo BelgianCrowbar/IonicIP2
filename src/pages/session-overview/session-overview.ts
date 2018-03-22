@@ -29,18 +29,17 @@ export class SessionOverviewPage {
   }
 
   ionViewDidLoad() {
-
     this.restService.get('sessions/getAll').subscribe(ses => {
       console.log(ses);
       for (const obj of ses) {
         console.log(obj);
         if (obj.startTime > new Date()) {
           this.plannedSessions.push(obj);
-        } else if (obj.startTime < new Date()) {
+        } else if (obj.startTime < new Date() || obj.active) {
           this.activeSessions.push(obj);
         }
       }
-    },error2 => console.log(error2));
+    }, error2 => console.log(error2));
   }
 
   playSession(id: string) {
@@ -61,7 +60,7 @@ export class SessionOverviewPage {
               param1: session
             });
           }
-        },{
+        }, {
           text: 'Cancel',
           role: 'cancel',
           handler: () => {
@@ -86,7 +85,7 @@ export class SessionOverviewPage {
               param1: session
             });
           }
-        },{
+        }, {
           text: 'Cancel',
           role: 'cancel',
           handler: () => {

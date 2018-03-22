@@ -876,7 +876,6 @@ var AuthProvider = /** @class */ (function () {
             password: values.password
         });
         var headers = new __WEBPACK_IMPORTED_MODULE_5__angular_common_http__["d" /* HttpHeaders */]().set('Content-Type', 'application/json; charset=utf-8');
-        //headers.append( 'Authorization', 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJpbmR5LmRld2Fja2VyQHN0dWRlbnQua2RnLmJlIiwiZXhwIjoxNTIwMjU1NDQ5fQ.vQ5LG41grArPwWFJu1J4Lg_KE6Xx2tenrN48O77b06pmDJmtHWBnAaN_ovVOJVzEnx4g5u8n_1gxI3xc_3AOag');
         return this.httpClient.post(__WEBPACK_IMPORTED_MODULE_3__config__["a" /* SERVER_URL */] + "login", body, { headers: headers })
             .pipe(Object(__WEBPACK_IMPORTED_MODULE_1_rxjs_operators_tap__["tap"])(function (jwt) { return _this.handleJwtResponse(jwt.token); }));
     };
