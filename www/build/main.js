@@ -615,7 +615,7 @@ var CardsPage = /** @class */ (function () {
                 _this.picture = data;
                 _this.card.pictureId = _this.picture.pictureId;
                 _this.session.suggestedCards.push(_this.card);
-                _this.restService.post('sessions/update', _this.session).subscribe(function (data) {
+                _this.restService.post('sessions/addSuggestion/' + _this.session.sessionId, _this.card).subscribe(function (data) {
                     _this.session = data;
                     _this.stoploading();
                     _this.handleSucces();
@@ -628,7 +628,7 @@ var CardsPage = /** @class */ (function () {
         }
         else {
             this.session.suggestedCards.push(this.card);
-            this.restService.post('sessions/update', this.session).subscribe(function (data) {
+            this.restService.post('sessions/addSuggestion/' + this.session.sessionId, this.card).subscribe(function (data) {
                 _this.session = data;
                 _this.stoploading();
                 _this.handleSucces();
@@ -675,13 +675,10 @@ var CardsPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_4__angular_core__["Component"])({
             selector: 'page-cards',template:/*ion-inline-start:"D:\KdG\3de jaar\IntegratieProject\Officieel\IonicIP2\src\pages\cards\cards.html"*/'<!--\n\n  Generated template for the CardsPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <button ion-button icon-only menuToggle side="left">\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>Cards</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n  <h1>Kaartjes toevoegen</h1>\n\n  <form #form="ngForm" (ngSubmit)="onSubmit()" novalidate>\n\n    <ion-list>\n\n      <ion-item>\n\n        <ion-label>\n\n          <h1 style="color: #488aff">Beschrijving</h1>\n\n        </ion-label>\n\n      </ion-item>\n\n\n\n      <ion-item>\n\n        <ion-textarea name="text" class="form-control" required [(ngModel)]="card.text"\n\n                      placeholder="Enter a description"></ion-textarea>\n\n      </ion-item>\n\n\n\n      <ion-item>\n\n        <ion-label>\n\n          <h1 style="color: #488aff">Afbeelding toevoegen</h1>\n\n        </ion-label>\n\n      </ion-item>\n\n\n\n      <ion-item>\n\n        <div class="content">\n\n          <img class="img-avatar" src="{{imgsrc}}" height="40" width="40" alt="img-avatar">\n\n          <ion-item id="imgSelect">\n\n            <ion-input type="file" name="file" id="file" class="form-control"\n\n                       (change)="onFileChange($event)"></ion-input>\n\n          </ion-item>\n\n        </div>\n\n      </ion-item>\n\n    </ion-list>\n\n\n\n    <button ion-button round full style="background-color: lightgreen" type="submit" [disabled]="!form.valid">Opslaan</button>\n\n  </form>\n\n  <button ion-button round full style="background-color: tomato" (click)="cancel()">Cancel</button>\n\n</ion-content>\n\n'/*ion-inline-end:"D:\KdG\3de jaar\IntegratieProject\Officieel\IonicIP2\src\pages\cards\cards.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0_ionic_angular__["h" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["i" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["f" /* LoadingController */],
-            __WEBPACK_IMPORTED_MODULE_2__providers_rest_rest__["a" /* RestProvider */],
-            __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["k" /* ToastController */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["h" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["i" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["f" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["f" /* LoadingController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__providers_rest_rest__["a" /* RestProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_rest_rest__["a" /* RestProvider */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["k" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["k" /* ToastController */]) === "function" && _e || Object])
     ], CardsPage);
     return CardsPage;
+    var _a, _b, _c, _d, _e;
 }());
 
 //# sourceMappingURL=cards.js.map

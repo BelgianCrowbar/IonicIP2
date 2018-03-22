@@ -69,7 +69,7 @@ export class CardsPage {
           this.picture = data;
           this.card.pictureId = this.picture.pictureId;
           this.session.suggestedCards.push(this.card);
-          this.restService.post('sessions/update', this.session).subscribe(
+          this.restService.post('sessions/addSuggestion/'+this.session.sessionId, this.card).subscribe(
             data => {
               this.session = data;
               this.stoploading();
@@ -86,7 +86,7 @@ export class CardsPage {
       );
     } else {
       this.session.suggestedCards.push(this.card);
-      this.restService.post('sessions/update', this.session).subscribe(
+      this.restService.post('sessions/addSuggestion/'+this.session.sessionId, this.card).subscribe(
         data => {
           this.session = data;
           this.stoploading();
