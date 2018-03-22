@@ -33,10 +33,14 @@ export class SessionOverviewPage {
       console.log(ses);
       for (const obj of ses) {
         console.log(obj);
-        if (obj.startTime > new Date()) {
-          this.plannedSessions.push(obj);
-        } else if (obj.startTime < new Date() || obj.active) {
+        if (obj.active){
           this.activeSessions.push(obj);
+        }else{
+          if (obj.startTime < new Date()){
+            this.stoppedSessions.push(obj);
+          }else{
+            this.plannedSessions.push(obj);
+          }
         }
       }
     }, error2 => console.log(error2));

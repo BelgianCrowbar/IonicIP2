@@ -1293,11 +1293,16 @@ var SessionOverviewPage = /** @class */ (function () {
             for (var _i = 0, ses_1 = ses; _i < ses_1.length; _i++) {
                 var obj = ses_1[_i];
                 console.log(obj);
-                if (obj.startTime > new Date()) {
-                    _this.plannedSessions.push(obj);
-                }
-                else if (obj.startTime < new Date()) {
+                if (obj.active) {
                     _this.activeSessions.push(obj);
+                }
+                else {
+                    if (obj.startTime < new Date()) {
+                        _this.stoppedSessions.push(obj);
+                    }
+                    else {
+                        _this.plannedSessions.push(obj);
+                    }
                 }
             }
         }, function (error2) { return console.log(error2); });
